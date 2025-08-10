@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: Georgia, serif;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-mystical-dark via-gray-900 to-mystical-navy min-h-screen text-white;
+  }
+}
+
+@layer components {
+  .card-back {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 2px solid #F59E0B;
+  }
+  
+  .card-front {
+    @apply bg-white text-gray-800 border-2 border-mystical-gold;
+  }
+  
+  .mystical-card {
+    @apply transform transition-all duration-300 hover:scale-105 hover:shadow-xl;
+  }
+  
+  .hexagram-line {
+    @apply bg-mystical-gold;
+    height: 4px;
+    margin: 6px 0;
+    border-radius: 2px;
+  }
+  
+  .broken-line {
+    @apply relative;
+  }
+  
+  .broken-line::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 20%;
+    height: 100%;
+    background: #1F2937;
+    transform: translateX(-50%);
+  }
+}
