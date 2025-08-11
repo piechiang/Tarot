@@ -24,6 +24,25 @@
   
   .mystical-card {
     @apply transform transition-all duration-300 hover:scale-105 hover:shadow-xl;
+    perspective: 1000px;
+  }
+  
+  .tarot-card-image {
+    @apply w-full h-full object-cover rounded-lg transition-all duration-300;
+    image-rendering: crisp-edges;
+  }
+  
+  .tarot-card-placeholder {
+    @apply flex items-center justify-center bg-gradient-to-br from-mystical-purple to-mystical-navy text-white font-bold rounded-lg;
+  }
+  
+  .animate-card-flip {
+    animation: cardFlip 0.8s ease-out forwards;
+  }
+  
+  @keyframes cardFlip {
+    0% { transform: rotateY(180deg); opacity: 0; }
+    100% { transform: rotateY(0deg); opacity: 1; }
   }
   
   .hexagram-line {

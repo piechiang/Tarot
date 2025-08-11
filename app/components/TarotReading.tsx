@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { tarotCards, cardSpreads, TarotCard } from '../../lib/tarot-data'
+import { enhanceTarotCards, getCardImageUrl } from '../../lib/tarot-card-enhancer'
+import TarotCardImage from './TarotCardImage'
 import { Shuffle, RotateCcw, Heart, Briefcase, GraduationCap } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 
@@ -23,6 +25,9 @@ export default function TarotReading() {
   const [isShuffling, setIsShuffling] = useState(false)
   const [drawnCards, setDrawnCards] = useState<DrawnCard[]>([])
   const [revealedCards, setRevealedCards] = useState<number>(0)
+  
+  // Use enhanced tarot cards with image URLs
+  const enhancedCards = enhanceTarotCards(tarotCards)
 
   const shuffle = () => {
     setIsShuffling(true)
@@ -37,7 +42,7 @@ export default function TarotReading() {
   const drawCards = () => {
     const spread = cardSpreads[selectedSpread]
     const numberOfCards = spread.positions.length
-    const shuffledCards = [...tarotCards].sort(() => Math.random() - 0.5)
+    const shuffledCards = [...enhancedCards].sort(() => Math.random() - 0.5)
     
     const drawn: DrawnCard[] = []
     for (let i = 0; i < numberOfCards; i++) {
@@ -213,31 +218,12 @@ export default function TarotReading() {
             
             <div className="mystical-card mx-auto w-48 h-72 relative">
               {revealedCards > index ? (
-                <div className={`w-full h-full card-front rounded-lg p-4 flex flex-col justify-between animate-card-flip ${drawn.reversed ? 'transform rotate-180' : ''}`}>
-                  <div className="text-center space-y-2">
-                    <h4 className="font-bold text-lg">{drawn.card.nameCn || drawn.card.name}</h4>
-                    <p className="text-xs text-gray-600 uppercase tracking-wide">
-                      {drawn.card.suitCn || drawn.card.suit} • {drawn.reversed ? '逆位' : '正位'}
-                    </p>
-                  </div>
-                  
-                  <div className="text-center">
-                    <div className="w-20 h-20 mx-auto bg-gradient-to-br from-mystical-purple to-mystical-navy rounded-full flex items-center justify-center mb-2">
-                      <span className="text-2xl text-white font-bold">
-                        {drawn.card.suit === 'major' ? '✨' : 
-                         drawn.card.suit === 'cups' ? '🏆' :
-                         drawn.card.suit === 'wands' ? '🔥' :
-                         drawn.card.suit === 'swords' ? '⚔️' : '💰'}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div className="text-center">
-                    <p className="text-xs text-gray-600">
-                      {drawn.reversed ? '逆位' : '正位'}
-                    </p>
-                  </div>
-                </div>
+                <TarotCardImage
+                  card={drawn.card}
+                  reversed={drawn.reversed}
+                  className="w-full h-full animate-card-flip"
+                  showPlaceholder={true}
+                />
               ) : (
                 <div className="w-full h-full card-back rounded-lg">
                   <div className="w-full h-full bg-gradient-to-br from-purple-900 to-indigo-900 border-2 border-mystical-gold rounded-lg flex items-center justify-center">

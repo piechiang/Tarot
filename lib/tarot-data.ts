@@ -4,6 +4,8 @@ export interface TarotCard {
   nameCn?: string;
   suit: 'major' | 'cups' | 'wands' | 'swords' | 'pentacles';
   suitCn?: string;
+  imageUrl?: string;
+  imagePath?: string;
   upright: {
     keywords: string[];
     keywordsCn?: string[];
@@ -30,6 +32,7 @@ export const tarotCards: TarotCard[] = [
     nameCn: "愚者",
     suit: "major",
     suitCn: "大奥秘",
+    imageUrl: "/images/tarot/major-arcana/00-fool.jpg",
     upright: {
       keywords: ["New beginnings", "Innocence", "Spontaneity", "Adventure"],
       keywordsCn: ["新开始", "纯真", "自发性", "冒险"],
@@ -280,31 +283,47 @@ export const tarotCards: TarotCard[] = [
   {
     id: 11,
     name: "Justice",
+    nameCn: "正义",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Justice", "Fairness", "Truth", "Cause and effect", "Law"],
+      keywordsCn: ["正义", "公平", "真理", "因果关系", "法律"],
       meaning: "Justice represents justice, fairness, truth, cause and effect, and law. Decisions will be made fairly and with integrity.",
-      advice: "Seek truth and act with integrity. Fair judgment will be rendered in your situation."
+      meaningCn: "正义代表公正、公平、真理、因果关系和法律。决定将公平公正地做出。",
+      advice: "Seek truth and act with integrity. Fair judgment will be rendered in your situation.",
+      adviceCn: "寻求真理，诚实行事。你的情况会得到公正的判决。"
     },
     reversed: {
       keywords: ["Unfairness", "Lack of accountability", "Dishonesty"],
+      keywordsCn: ["不公平", "缺乏责任感", "不诚实"],
       meaning: "The reversed Justice suggests unfairness, lack of accountability, and dishonesty in dealings.",
-      advice: "Take responsibility for your actions. Seek to make amends if you have acted unfairly."
+      meaningCn: "逆位的正义暗示不公平、缺乏责任感和交往中的不诚实。",
+      advice: "Take responsibility for your actions. Seek to make amends if you have acted unfairly.",
+      adviceCn: "为你的行为承担责任。如果你行为不公，寻求弥补。"
     }
   },
   {
     id: 12,
     name: "The Hanged Man",
+    nameCn: "倒吊人",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Waiting", "Surrender", "Letting go", "New perspective"],
+      keywordsCn: ["等待", "投降", "放手", "新视角"],
       meaning: "The Hanged Man represents waiting, surrender, letting go, and gaining new perspective through stillness.",
-      advice: "Sometimes inaction is the best action. Let go of control and trust the process."
+      meaningCn: "倒吊人代表等待、投降、放手，以及通过静止获得新的视角。",
+      advice: "Sometimes inaction is the best action. Let go of control and trust the process.",
+      adviceCn: "有时不行动是最好的行动。放弃控制，相信过程。"
     },
     reversed: {
       keywords: ["Delays", "Resistance", "Stalling", "Indecision"],
+      keywordsCn: ["延迟", "抵抗", "拖延", "犹豫不决"],
       meaning: "The reversed Hanged Man suggests delays, resistance to change, stalling, and indecision.",
-      advice: "Stop resisting necessary changes. Move forward even if the path isn't completely clear."
+      meaningCn: "逆位的倒吊人暗示延迟、对变化的抵抗、拖延和犹豫不决。",
+      advice: "Stop resisting necessary changes. Move forward even if the path isn't completely clear.",
+      adviceCn: "停止抵抗必要的改变。即使道路不完全清晰，也要向前迈进。"
     }
   },
   {
@@ -333,121 +352,185 @@ export const tarotCards: TarotCard[] = [
   {
     id: 14,
     name: "Temperance",
+    nameCn: "节制",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Balance", "Moderation", "Patience", "Purpose", "Meaning"],
+      keywordsCn: ["平衡", "节制", "耐心", "目的", "意义"],
       meaning: "Temperance represents balance, moderation, patience, purpose, and meaning. Finding the middle path brings harmony.",
-      advice: "Seek balance and moderation in all things. Patience will help you achieve your long-term goals."
+      meaningCn: "节制代表平衡、节制、耐心、目的和意义。找到中间道路带来和谐。",
+      advice: "Seek balance and moderation in all things. Patience will help you achieve your long-term goals.",
+      adviceCn: "在一切事物中寻求平衡和节制。耐心将帮助你实现长期目标。"
     },
     reversed: {
       keywords: ["Imbalance", "Excess", "Self-healing", "Re-alignment"],
+      keywordsCn: ["失衡", "过度", "自我治愈", "重新调整"],
       meaning: "The reversed Temperance suggests imbalance, excess, and the need for self-healing and re-alignment.",
-      advice: "Address areas of imbalance in your life. Practice moderation and self-care."
+      meaningCn: "逆位的节制暗示失衡、过度，以及对自我治愈和重新调整的需要。",
+      advice: "Address areas of imbalance in your life. Practice moderation and self-care.",
+      adviceCn: "解决生活中不平衡的领域。练习节制和自我关爱。"
     }
   },
   {
     id: 15,
     name: "The Devil",
+    nameCn: "恶魔",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Bondage", "Addiction", "Sexuality", "Materialism"],
+      keywordsCn: ["束缚", "上瘾", "性欲", "物质主义"],
       meaning: "The Devil represents bondage, addiction, sexuality, and materialism. Being trapped by material desires or unhealthy patterns.",
-      advice: "Examine what may be controlling you. Break free from limiting beliefs and unhealthy attachments."
+      meaningCn: "恶魔代表束缚、上瘾、性欲和物质主义。被物质欲望或不健康的模式所困。",
+      advice: "Examine what may be controlling you. Break free from limiting beliefs and unhealthy attachments.",
+      adviceCn: "审视什么可能在控制你。打破限制性信念和不健康的依恋。"
     },
     reversed: {
       keywords: ["Freedom", "Release", "Reclaiming power", "Independence"],
+      keywordsCn: ["自由", "释放", "夺回力量", "独立"],
       meaning: "The reversed Devil suggests freedom, release, reclaiming personal power, and independence from constraining forces.",
-      advice: "You're breaking free from limitations. Continue to reclaim your personal power and independence."
+      meaningCn: "逆位的恶魔暗示自由、释放、夺回个人力量，以及从束缚力量中获得独立。",
+      advice: "You're breaking free from limitations. Continue to reclaim your personal power and independence.",
+      adviceCn: "你正在从限制中突破。继续夺回你的个人力量和独立性。"
     }
   },
   {
     id: 16,
     name: "The Tower",
+    nameCn: "塔",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Sudden change", "Upheaval", "Chaos", "Revelation", "Awakening"],
+      keywordsCn: ["突发改变", "剧变", "混乱", "揭示", "觉醒"],
       meaning: "The Tower represents sudden change, upheaval, chaos, revelation, and awakening. Dramatic change that clears the way for something new.",
-      advice: "Accept that some structures in your life need to fall. This upheaval will ultimately lead to positive change."
+      meaningCn: "塔代表突发改变、剧变、混乱、揭示和觉醒。戏剧性的改变为新事物清道。",
+      advice: "Accept that some structures in your life need to fall. This upheaval will ultimately lead to positive change.",
+      adviceCn: "接受生活中的一些结构需要倒塔。这场剧变最终将导致积极的改变。"
     },
     reversed: {
       keywords: ["Personal transformation", "Fear of change", "Avoiding disaster"],
+      keywordsCn: ["个人转化", "对改变的恐惧", "避免灾难"],
       meaning: "The reversed Tower suggests personal transformation, fear of change, and potentially avoiding disaster through awareness.",
-      advice: "Don't resist necessary personal transformation. Face your fears about change."
+      meaningCn: "逆位的塔暗示个人转化、对改变的恐惧，以及可能通过意识避免灾雾。",
+      advice: "Don't resist necessary personal transformation. Face your fears about change.",
+      adviceCn: "不要抵抗必要的个人转化。面对你对改变的恐惧。"
     }
   },
   {
     id: 17,
     name: "The Star",
+    nameCn: "星星",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Hope", "Faith", "Purpose", "Renewal", "Spirituality"],
+      keywordsCn: ["希望", "信念", "目的", "更新", "灵性"],
       meaning: "The Star represents hope, faith, purpose, renewal, and spirituality. A time of healing and renewed faith in the future.",
-      advice: "Keep faith in your dreams and aspirations. Healing and renewal are coming into your life."
+      meaningCn: "星星代表希望、信念、目的、更新和灵性。这是治愈和重新对未来抱有信念的时候。",
+      advice: "Keep faith in your dreams and aspirations. Healing and renewal are coming into your life.",
+      adviceCn: "对你的梦想和抱负保持信念。治愈和更新正在进入你的生活。"
     },
     reversed: {
       keywords: ["Lack of faith", "Despair", "Self-trust", "Disconnection"],
+      keywordsCn: ["缺乏信念", "绝望", "自我信任", "断连"],
       meaning: "The reversed Star suggests lack of faith, despair, loss of self-trust, and feeling disconnected from purpose.",
-      advice: "Reconnect with your inner guidance and renew your faith. Trust that better times are ahead."
+      meaningCn: "逆位的星星暗示缺乏信念、绝望、失去自我信任，以及感觉与目的断连。",
+      advice: "Reconnect with your inner guidance and renew your faith. Trust that better times are ahead.",
+      adviceCn: "重新连接你的内在指引，重新燃起信念。相信更好的时光在前方。"
     }
   },
   {
     id: 18,
     name: "The Moon",
+    nameCn: "月亮",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Illusion", "Fear", "Anxiety", "Subconscious", "Intuition"],
+      keywordsCn: ["幻想", "恐惧", "焦虑", "潜意识", "直觉"],
       meaning: "The Moon represents illusion, fear, anxiety, subconscious influences, and trusting intuition over logic.",
-      advice: "Trust your intuition but be aware of illusions. Face your fears and anxieties with courage."
+      meaningCn: "月亮代表幻想、恐惧、焦虑、潜意识影响，以及相信直觉而非逻辑。",
+      advice: "Trust your intuition but be aware of illusions. Face your fears and anxieties with courage.",
+      adviceCn: "相信你的直觉，但要意识到幻想。勇敢地面对你的恐惧和焦虑。"
     },
     reversed: {
       keywords: ["Release of fear", "Repressed emotion", "Inner confusion"],
+      keywordsCn: ["释放恐惧", "受压抑情绪", "内在困惑"],
       meaning: "The reversed Moon suggests release of fear, repressed emotions surfacing, and inner confusion being resolved.",
-      advice: "Work through repressed emotions and fears. Clarity will come as you face your shadow self."
+      meaningCn: "逆位的月亮暗示恐惧的释放、被压抑的情绪浮现，以及内在困惑得到解决。",
+      advice: "Work through repressed emotions and fears. Clarity will come as you face your shadow self.",
+      adviceCn: "处理被压抑的情绪和恐惧。当你面对阴暗自我时，清晰将会到来。"
     }
   },
   {
     id: 19,
     name: "The Sun",
+    nameCn: "太阳",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Positivity", "Fun", "Warmth", "Success", "Vitality", "Joy"],
+      keywordsCn: ["积极", "乐趣", "温暖", "成功", "活力", "欢乐"],
       meaning: "The Sun represents positivity, fun, warmth, success, vitality, and joy. A time of happiness and achievement.",
-      advice: "Embrace joy and celebrate your successes. Share your positive energy with others."
+      meaningCn: "太阳代表积极、乐趣、温暖、成功、活力和欢乐。这是幸福和成就的时候。",
+      advice: "Embrace joy and celebrate your successes. Share your positive energy with others.",
+      adviceCn: "拥抱欢乐，庆祝你的成功。与他人分享你的积极能量。"
     },
     reversed: {
       keywords: ["Inner child", "Feeling down", "Overly optimistic"],
+      keywordsCn: ["内在的孩子", "情绪低落", "过度乐观"],
       meaning: "The reversed Sun suggests connecting with your inner child, feeling down temporarily, or being overly optimistic.",
-      advice: "Reconnect with simple pleasures and your playful nature. Balance optimism with realism."
+      meaningCn: "逆位的太阳暗示与内在的孩子连接、暂时情绪低落，或过度乐观。",
+      advice: "Reconnect with simple pleasures and your playful nature. Balance optimism with realism.",
+      adviceCn: "重新连接简单的快乐和你的玩心。平衡乐观与现实主义。"
     }
   },
   {
     id: 20,
     name: "Judgement",
+    nameCn: "审判",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Judgement", "Rebirth", "Inner calling", "Forgiveness"],
+      keywordsCn: ["审判", "重生", "内在召唤", "宽恕"],
       meaning: "Judgement represents judgement, rebirth, inner calling, and forgiveness. A time of spiritual awakening and second chances.",
-      advice: "Listen to your inner calling and embrace your higher purpose. Forgive yourself and others."
+      meaningCn: "审判代表审判、重生、内在召唤和宽恕。这是精神觉醒和第二次机会的时候。",
+      advice: "Listen to your inner calling and embrace your higher purpose. Forgive yourself and others.",
+      adviceCn: "倾听你的内在召唤，拥抱你的更高目的。宽恕自己和他人。"
     },
     reversed: {
       keywords: ["Self-doubt", "Inner critic", "Ignoring the call"],
+      keywordsCn: ["自我怀疑", "内在批判", "忽视召唤"],
       meaning: "The reversed Judgement suggests self-doubt, harsh inner critic, and ignoring your inner calling or higher purpose.",
-      advice: "Silence your inner critic and trust your inner wisdom. Don't ignore your calling to something greater."
+      meaningCn: "逆位的审判暗示自我怀疑、苛刻的内在批判，以及忽视你的内在召唤或更高目的。",
+      advice: "Silence your inner critic and trust your inner wisdom. Don't ignore your calling to something greater.",
+      adviceCn: "让你的内在批判安静，相信你的内在智慧。不要忽视你对更伟大事物的召唤。"
     }
   },
   {
     id: 21,
     name: "The World",
+    nameCn: "世界",
     suit: "major",
+    suitCn: "大奥秘",
     upright: {
       keywords: ["Completion", "Integration", "Accomplishment", "Travel"],
+      keywordsCn: ["完成", "整合", "成就", "旅行"],
       meaning: "The World represents completion, integration, accomplishment, and travel. The successful end of the Fool's journey.",
-      advice: "Celebrate your achievements and prepare for new adventures. You have accomplished something significant."
+      meaningCn: "世界代表完成、整合、成就和旅行。是愚者之旅的成功终点。",
+      advice: "Celebrate your achievements and prepare for new adventures. You have accomplished something significant.",
+      adviceCn: "庆祝你的成就，为新的冒险做准备。你已经完成了一些重要的事情。"
     },
     reversed: {
       keywords: ["Incomplete", "Lack of closure", "Stagnation"],
+      keywordsCn: ["不完整", "缺乏结束", "停滞"],
       meaning: "The reversed World suggests something incomplete, lack of closure, and stagnation in progress.",
-      advice: "Identify what needs to be completed before moving forward. Seek closure in unfinished matters."
+      meaningCn: "逆位的世界暗示一些不完整的事物、缺乏结束和进展中的停滞。",
+      advice: "Identify what needs to be completed before moving forward. Seek closure in unfinished matters.",
+      adviceCn: "在向前迈进之前，确定什么需要完成。在未完成的事务中寻求结束。"
     }
   },
 
@@ -455,211 +538,323 @@ export const tarotCards: TarotCard[] = [
   {
     id: 22,
     name: "Ace of Cups",
+    nameCn: "圣杯王牌",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Love", "New relationships", "Compassion", "Creativity"],
+      keywordsCn: ["爱情", "新关系", "同情心", "创造力"],
       meaning: "A new beginning in emotional matters. The start of love, friendship, or creative projects.",
-      advice: "Open your heart to new emotional experiences and creative inspirations."
+      meaningCn: "情感事务的新开始。爱情、友谊或创意项目的开始。",
+      advice: "Open your heart to new emotional experiences and creative inspirations.",
+      adviceCn: "对新的情感经历和创意灵感开放你的心灵。"
     },
     reversed: {
       keywords: ["Self-love", "Intuition", "Repressed emotions"],
+      keywordsCn: ["自爱", "直觉", "压抑情绪"],
       meaning: "Focus on self-love and emotional healing before engaging with others.",
-      advice: "Practice self-compassion and work on healing emotional wounds."
+      meaningCn: "在与他人建立关系之前，专注于自爱和情感治愈。",
+      advice: "Practice self-compassion and work on healing emotional wounds.",
+      adviceCn: "练习自我同情，努力治愈情感创伤。"
     }
   },
   {
     id: 23,
     name: "Two of Cups",
+    nameCn: "圣杯二",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Unified love", "Partnership", "Mutual attraction"],
+      keywordsCn: ["统一的爱", "伙伴关系", "相互吸引"],
       meaning: "A strong partnership or romantic connection based on mutual respect and understanding.",
-      advice: "Nurture your important relationships and seek balance in partnerships."
+      meaningCn: "基于相互尊重和理解的强大伙伴关系或浪漫连接。",
+      advice: "Nurture your important relationships and seek balance in partnerships.",
+      adviceCn: "培养你重要的人际关系，在伙伴关系中寻求平衡。"
     },
     reversed: {
       keywords: ["Breakup", "Imbalance", "Self-love"],
+      keywordsCn: ["分手", "失衡", "自爱"],
       meaning: "Relationship difficulties or the need to focus on self-love before partnering with others.",
-      advice: "Address relationship imbalances or take time to work on yourself."
+      meaningCn: "关系困难或需要在与他人建立伙伴关系之前专注于自爱。",
+      advice: "Address relationship imbalances or take time to work on yourself.",
+      adviceCn: "解决关系不平衡问题，或花时间提升自己。"
     }
   },
   {
     id: 24,
     name: "Three of Cups",
+    nameCn: "圣杯三",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Celebration", "Friendship", "Community", "Collaboration"],
+      keywordsCn: ["庆祝", "友谊", "社区", "合作"],
       meaning: "Celebration, friendship, and community support. A time of joy with others.",
-      advice: "Celebrate your achievements with friends and embrace community support."
+      meaningCn: "庆祝、友谊和社区支持。与他人共享欢乐的时光。",
+      advice: "Celebrate your achievements with friends and embrace community support.",
+      adviceCn: "与朋友一起庆祝你的成就，拥抱社区的支持。"
     },
     reversed: {
       keywords: ["Independence", "Alone time", "Cancelled plans"],
+      keywordsCn: ["独立", "独处时间", "取消计划"],
       meaning: "Need for independence, spending time alone, or social plans being disrupted.",
-      advice: "Take time for yourself when needed, but don't isolate completely."
+      meaningCn: "需要独立、独处时间，或社交计划被打乱。",
+      advice: "Take time for yourself when needed, but don't isolate completely.",
+      adviceCn: "必要时给自己一些时间，但不要完全孤立自己。"
     }
   },
   {
     id: 25,
     name: "Four of Cups",
+    nameCn: "圣杯四",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Apathy", "Contemplation", "Disconnection", "Boredom"],
+      keywordsCn: ["漠不关心", "沉思", "断连", "无聊"],
       meaning: "Feeling apathetic or disconnected. Missing opportunities due to lack of interest.",
-      advice: "Open yourself to new opportunities and don't let boredom blind you to possibilities."
+      meaningCn: "感到漠不关心或断连。因缺乏兴趣而错过机会。",
+      advice: "Open yourself to new opportunities and don't let boredom blind you to possibilities.",
+      adviceCn: "对新机会开放自己，不要让无聊蒙蔽你的可能性。"
     },
     reversed: {
       keywords: ["Motivation", "New possibilities", "Acceptance"],
+      keywordsCn: ["动机", "新可能", "接受"],
       meaning: "Renewed motivation and willingness to accept new opportunities or possibilities.",
-      advice: "Embrace new opportunities with renewed enthusiasm and energy."
+      meaningCn: "重新燃起的动机和接受新机会或可能性的意愿。",
+      advice: "Embrace new opportunities with renewed enthusiasm and energy.",
+      adviceCn: "以重新燃起的热情和能量拥抱新机会。"
     }
   },
   {
     id: 26,
     name: "Five of Cups",
+    nameCn: "圣杯五",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Regret", "Failure", "Disappointment", "Pessimism"],
+      keywordsCn: ["后悔", "失败", "失望", "悲观"],
       meaning: "Dwelling on past failures or disappointments. Focusing on what went wrong rather than what remains.",
-      advice: "Learn from past mistakes but don't let regret consume you. Focus on what you still have."
+      meaningCn: "沉滯于过去的失败或失望。关注出错的事情而不是什么仍然存在。",
+      advice: "Learn from past mistakes but don't let regret consume you. Focus on what you still have.",
+      adviceCn: "从过去的错误中学习，但不要让后悔吞噬你。专注于你仍然拥有的。"
     },
     reversed: {
       keywords: ["Personal setbacks", "Self-forgiveness", "Moving on"],
+      keywordsCn: ["个人挫折", "自我宽恕", "继续前进"],
       meaning: "Beginning to heal from setbacks and practicing self-forgiveness. Ready to move forward.",
-      advice: "Forgive yourself for past mistakes and focus on healing and moving forward."
+      meaningCn: "开始从挫折中恢复，练习自我宽恕。准备好向前迈进。",
+      advice: "Forgive yourself for past mistakes and focus on healing and moving forward.",
+      adviceCn: "宽恕自己过去的错误，专注于治愈和向前迈进。"
     }
   },
   {
     id: 27,
     name: "Six of Cups",
+    nameCn: "圣杯六",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Revisiting the past", "Childhood memories", "Innocence"],
+      keywordsCn: ["重访过去", "童年回忆", "纯真"],
       meaning: "Nostalgia, childhood memories, and innocence. Reconnecting with your past or inner child.",
-      advice: "Embrace pleasant memories but don't get stuck in the past. Learn from your history."
+      meaningCn: "怀旧、童年回忆和纯真。重新连接你的过去或内在的孩子。",
+      advice: "Embrace pleasant memories but don't get stuck in the past. Learn from your history.",
+      adviceCn: "拥抱美好的回忆，但不要困在过去。从你的历史中学习。"
     },
     reversed: {
       keywords: ["Living in the past", "Forgiveness", "Lacking playfulness"],
+      keywordsCn: ["沉滟过去", "宽恕", "缺乏玩心"],
       meaning: "Being too focused on the past or needing to forgive past hurts to move forward.",
-      advice: "Release past hurts and focus on creating new positive memories."
+      meaningCn: "过度专注于过去，或需要宽恕过去的伤害才能向前迈进。",
+      advice: "Release past hurts and focus on creating new positive memories.",
+      adviceCn: "释放过去的伤害，专注于创造新的积极回忆。"
     }
   },
   {
     id: 28,
     name: "Seven of Cups",
+    nameCn: "圣杯七",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Opportunities", "Choices", "Wishful thinking", "Illusion"],
+      keywordsCn: ["机会", "选择", "一厢情愿", "幻想"],
       meaning: "Many options and opportunities, but also confusion and illusion. Too many choices to make.",
-      advice: "Ground your dreams in reality and choose your opportunities carefully."
+      meaningCn: "许多选择和机会，但也有困惑和幻想。过多的选择需要做决定。",
+      advice: "Ground your dreams in reality and choose your opportunities carefully.",
+      adviceCn: "让你的梦想脚踏实地，谨慎地选择你的机会。"
     },
     reversed: {
       keywords: ["Alignment", "Personal values", "Overwhelmed by choices"],
+      keywordsCn: ["一致", "个人价值观", "被选择压倒"],
       meaning: "Finding clarity in choices by aligning with personal values, or feeling overwhelmed by options.",
-      advice: "Use your values as a guide to make clear decisions among many options."
+      meaningCn: "通过与个人价值观保持一致来在选择中找到清晰，或被选择所压倒。",
+      advice: "Use your values as a guide to make clear decisions among many options.",
+      adviceCn: "以你的价值观为指导，在众多选择中做出明智的决定。"
     }
   },
   {
     id: 29,
     name: "Eight of Cups",
+    nameCn: "圣杯八",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Disappointment", "Abandonment", "Withdrawal", "Escapism"],
+      keywordsCn: ["失望", "放弃", "退缩", "逃避主义"],
       meaning: "Walking away from a disappointing situation. Seeking something more meaningful.",
-      advice: "Sometimes walking away is the right choice. Trust your instincts about what serves you."
+      meaningCn: "从令人失望的情况中走开。寻求更有意义的事物。",
+      advice: "Sometimes walking away is the right choice. Trust your instincts about what serves you.",
+      adviceCn: "有时走开是正确的选择。相信你对什么对你有益的直觉。"
     },
     reversed: {
       keywords: ["Trying one more time", "Indecision", "Aimless drifting"],
+      keywordsCn: ["再试一次", "犹豫不决", "漫无目的漂泊"],
       meaning: "Attempting to salvage a situation one more time, or drifting without clear direction.",
-      advice: "Decide whether to recommit fully or let go completely. Avoid half-measures."
+      meaningCn: "尝试再次挝救局面，或没有明确方向地漂泊。",
+      advice: "Decide whether to recommit fully or let go completely. Avoid half-measures.",
+      adviceCn: "决定是否全力重新投入或完全放手。避免半心半意。"
     }
   },
   {
     id: 30,
     name: "Nine of Cups",
+    nameCn: "圣杯九",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Contentment", "Satisfaction", "Gratitude", "Wish come true"],
+      keywordsCn: ["满足", "满意", "感恩", "愿望成真"],
       meaning: "Emotional fulfillment and satisfaction. Getting what you wished for. The 'wish card'.",
-      advice: "Enjoy your achievements and express gratitude for what you have accomplished."
+      meaningCn: "情感上的满足和满意。得到你所愿望的。“愿望牌”。",
+      advice: "Enjoy your achievements and express gratitude for what you have accomplished.",
+      adviceCn: "享受你的成就，为你所完成的事情表达感恩。"
     },
     reversed: {
       keywords: ["Inner happiness", "Materialism", "Dissatisfaction"],
+      keywordsCn: ["内在幸福", "物质主义", "不满足"],
       meaning: "Seeking inner happiness rather than external validation, or dissatisfaction despite material success.",
-      advice: "Find happiness within yourself rather than seeking it through external achievements."
+      meaningCn: "寻求内在幸福而不是外在认可，或尽管物质成功但仍不满足。",
+      advice: "Find happiness within yourself rather than seeking it through external achievements.",
+      adviceCn: "在内心找到幸福，而不是通过外在成就来寻求幸福。"
     }
   },
   {
     id: 31,
     name: "Ten of Cups",
+    nameCn: "圣杯十",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Happiness", "Marriage", "Family", "Long-term success"],
+      keywordsCn: ["幸福", "婚姻", "家庭", "长期成功"],
       meaning: "Emotional fulfillment in relationships and family. Harmony and happiness in personal life.",
-      advice: "Cherish your relationships and create harmony in your personal life."
+      meaningCn: "在关系和家庭中的情感满足。个人生活中的和谐与幸福。",
+      advice: "Cherish your relationships and create harmony in your personal life.",
+      adviceCn: "珍惜你的人际关系，在个人生活中创造和谐。"
     },
     reversed: {
       keywords: ["Shattered dreams", "Broken family", "Bad investments"],
+      keywordsCn: ["破碎的梦想", "破裂的家庭", "糕糕投资"],
       meaning: "Disruption in family harmony or relationships. Disappointment in personal life.",
-      advice: "Work on healing family relationships and don't give up on your dreams of happiness."
+      meaningCn: "家庭和谐或关系中的破裂。个人生活中的失望。",
+      advice: "Work on healing family relationships and don't give up on your dreams of happiness.",
+      adviceCn: "努力治愈家庭关系，不要放弃你对幸福的梦想。"
     }
   },
   {
     id: 32,
     name: "Page of Cups",
+    nameCn: "圣杯伍从",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Creative opportunities", "Intuitive messages", "Curiosity"],
+      keywordsCn: ["创意机会", "直觉信息", "好奇心"],
       meaning: "A messenger of emotional or creative opportunities. New artistic projects or intuitive insights.",
-      advice: "Pay attention to your intuitive messages and embrace creative opportunities."
+      meaningCn: "情感或创意机会的信使。新的艺术项目或直觉洞察。",
+      advice: "Pay attention to your intuitive messages and embrace creative opportunities.",
+      adviceCn: "注意你的直觉信息，拥抱创意机会。"
     },
     reversed: {
       keywords: ["Emotional immaturity", "Insecurity", "Escapism"],
+      keywordsCn: ["情感不成熟", "不安全感", "逃避主义"],
       meaning: "Emotional immaturity or insecurity affecting your relationships or creative expression.",
-      advice: "Work on emotional maturity and address insecurities that hold you back."
+      meaningCn: "情感不成熟或不安全感影响你的关系或创意表达。",
+      advice: "Work on emotional maturity and address insecurities that hold you back.",
+      adviceCn: "努力提升情感成熟度，解决阻碍你的不安全感。"
     }
   },
   {
     id: 33,
     name: "Knight of Cups",
+    nameCn: "圣杯骑士",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Romance", "Charm", "Knight in shining armor", "Idealist"],
+      keywordsCn: ["浪漫", "魅力", "闪亮钨甲的骑士", "理想主义者"],
       meaning: "A romantic idealist bringing emotional messages. Following your heart and dreams.",
-      advice: "Follow your heart but balance emotion with practical considerations."
+      meaningCn: "一个浪漫的理想主义者带来情感信息。跟随你的心和梦想。",
+      advice: "Follow your heart but balance emotion with practical considerations.",
+      adviceCn: "跟随你的心，但要平衡情感与实际考虑。"
     },
     reversed: {
       keywords: ["Moodiness", "Disappointment", "Overemotional"],
+      keywordsCn: ["情绪化", "失望", "过度情绪化"],
       meaning: "Moodiness, emotional manipulation, or disappointment in romantic matters.",
-      advice: "Manage your emotions constructively and avoid manipulative behavior."
+      meaningCn: "情绪化、情感操纵或在浪漫事务中的失望。",
+      advice: "Manage your emotions constructively and avoid manipulative behavior.",
+      adviceCn: "建设性地管理你的情绪，避免操纵行为。"
     }
   },
   {
     id: 34,
     name: "Queen of Cups",
+    nameCn: "圣杯皇后",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Compassion", "Calm", "Comfort", "Intuition"],
+      keywordsCn: ["同情心", "平静", "安慰", "直觉"],
       meaning: "Emotional maturity, compassion, and intuitive wisdom. A nurturing and supportive presence.",
-      advice: "Trust your intuition and offer compassionate support to others and yourself."
+      meaningCn: "情感成熟、同情心和直觉智慧。一个滋养和支持的存在。",
+      advice: "Trust your intuition and offer compassionate support to others and yourself.",
+      adviceCn: "相信你的直觉，对他人和自己提供同情的支持。"
     },
     reversed: {
       keywords: ["Emotional insecurity", "Codependency", "Self-care"],
+      keywordsCn: ["情感不安全", "相互依赖", "自我关爱"],
       meaning: "Emotional insecurity, codependency, or neglecting self-care while caring for others.",
-      advice: "Practice self-care and establish healthy emotional boundaries."
+      meaningCn: "情感不安全、相互依赖，或在关爱他人时忽视自我关爱。",
+      advice: "Practice self-care and establish healthy emotional boundaries.",
+      adviceCn: "练习自我关爱，建立健康的情感边界。"
     }
   },
   {
     id: 35,
     name: "King of Cups",
+    nameCn: "圣杯国王",
     suit: "cups",
+    suitCn: "圣杯",
     upright: {
       keywords: ["Emotional balance", "Compassion", "Diplomacy"],
+      keywordsCn: ["情感平衡", "同情心", "外交"],
       meaning: "Emotional maturity and balance. Compassionate leadership and diplomatic solutions.",
-      advice: "Lead with emotional intelligence and maintain balance between heart and mind."
+      meaningCn: "情感成熟和平衡。充满同情心的领导力和外交解决方案。",
+      advice: "Lead with emotional intelligence and maintain balance between heart and mind.",
+      adviceCn: "以情商领导，保持心灵和理智之间的平衡。"
     },
     reversed: {
       keywords: ["Emotional manipulation", "Moodiness", "Lack of compassion"],
+      keywordsCn: ["情感操纵", "情绪化", "缺乏同情心"],
       meaning: "Using emotions to manipulate others or lacking compassion and emotional control.",
-      advice: "Use your emotional intelligence ethically and practice genuine compassion."
+      meaningCn: "利用情感操纵他人，或缺乏同情心和情感控制。",
+      advice: "Use your emotional intelligence ethically and practice genuine compassion.",
+      adviceCn: "道德地使用你的情商，练习真正的同情心。"
     }
   },
 
@@ -667,106 +862,162 @@ export const tarotCards: TarotCard[] = [
   {
     id: 36,
     name: "Ace of Wands",
+    nameCn: "权杖王牌",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
       keywords: ["Inspiration", "New opportunities", "Growth", "Potential"],
+      keywordsCn: ["灵感", "新机会", "成长", "潜力"],
       meaning: "A spark of inspiration and new creative or career opportunities. Raw potential waiting to be developed.",
-      advice: "Act on your inspiration and take advantage of new opportunities with enthusiasm."
+      meaningCn: "灵感的火花和新的创意或职业机会。等待开发的原始潜力。",
+      advice: "Act on your inspiration and take advantage of new opportunities with enthusiasm.",
+      adviceCn: "按照你的灵感行动，满怀热情地利用新机会。"
     },
     reversed: {
       keywords: ["Lack of energy", "Delays", "False starts"],
+      keywordsCn: ["缺乏能量", "延迟", "虚假开始"],
       meaning: "Lack of energy or motivation, delays in projects, or false starts in new ventures.",
-      advice: "Reassess your goals and wait for the right timing before proceeding."
+      meaningCn: "缺乏能量或动机、项目延迟，或新企业的虚假开始。",
+      advice: "Reassess your goals and wait for the right timing before proceeding.",
+      adviceCn: "重新评估你的目标，等待正确的时机再继续。"
     }
   },
   {
     id: 37,
     name: "Two of Wands",
+    nameCn: "权杖二",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
       keywords: ["Future planning", "Making decisions", "Leaving comfort zone"],
+      keywordsCn: ["未来规划", "做决定", "离开舒适区"],
       meaning: "Planning for the future and making important decisions. Ready to leave your comfort zone.",
-      advice: "Make concrete plans and be willing to take calculated risks to achieve your goals."
+      meaningCn: "为未来做计划和做重要决定。准备好离开你的舒适区。",
+      advice: "Make concrete plans and be willing to take calculated risks to achieve your goals.",
+      adviceCn: "制定具体计划，愿意承担经过计算的风险来实现目标。"
     },
     reversed: {
       keywords: ["Poor planning", "Lack of foresight", "Fear of unknown"],
+      keywordsCn: ["计划不周", "缺乏远见", "对未知的恐惧"],
       meaning: "Poor planning, lack of foresight, or fear preventing you from taking necessary action.",
-      advice: "Improve your planning and don't let fear hold you back from pursuing opportunities."
+      meaningCn: "计划不周、缺乏远见，或恐惧阻止你采取必要的行动。",
+      advice: "Improve your planning and don't let fear hold you back from pursuing opportunities.",
+      adviceCn: "改善你的计划，不要让恐惧阻碍你追求机会。"
     }
   },
   {
     id: 38,
     name: "Three of Wands",
+    nameCn: "权杖三",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
       keywords: ["Progress", "Expansion", "Foresight", "Overseas opportunities"],
+      keywordsCn: ["进展", "扩张", "远见", "海外机会"],
       meaning: "Expansion of horizons and long-term planning paying off. Progress in your endeavors.",
-      advice: "Continue with your long-term plans and consider expanding your scope or reach."
+      meaningCn: "视野的扩展和长期计划的回报。你的努力取得进展。",
+      advice: "Continue with your long-term plans and consider expanding your scope or reach.",
+      adviceCn: "继续你的长期计划，考虑扩大你的范围或影响力。"
     },
     reversed: {
       keywords: ["Playing small", "Lack of foresight", "Delays"],
+      keywordsCn: ["格局小", "缺乏远见", "延迟"],
       meaning: "Playing small, lack of foresight, or delays in expansion and progress.",
-      advice: "Think bigger and don't limit yourself. Plan more carefully for future success."
+      meaningCn: "格局过小、缺乏远见，或扩张和进展的延迟。",
+      advice: "Think bigger and don't limit yourself. Plan more carefully for future success.",
+      adviceCn: "思路要更大，不要限制自己。为未来的成功更仔细地计划。"
     }
   },
   {
     id: 39,
     name: "Four of Wands",
+    nameCn: "权杖四",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
       keywords: ["Celebration", "Joyful reunion", "Homecoming", "Wedding"],
+      keywordsCn: ["庆祝", "欢乐重聚", "回家", "婚礼"],
       meaning: "Celebration, joyful reunions, and achieving stability. A happy homecoming or milestone.",
-      advice: "Take time to celebrate your achievements and enjoy harmonious relationships."
+      meaningCn: "庆祝、欢乐的重聚和获得稳定。幸福的回家或里程碑。",
+      advice: "Take time to celebrate your achievements and enjoy harmonious relationships.",
+      adviceCn: "花时间庆祝你的成就，享受和谐的关系。"
     },
     reversed: {
       keywords: ["Home conflicts", "Delayed celebrations", "Lack of support"],
+      keywordsCn: ["家庭冲突", "庆祝延迟", "缺乏支持"],
       meaning: "Conflicts at home, delayed celebrations, or lack of support from family or community.",
-      advice: "Work on resolving home conflicts and build supportive relationships."
+      meaningCn: "家庭冲突、庆祝延迟，或缺乏家庭或社区的支持。",
+      advice: "Work on resolving home conflicts and build supportive relationships.",
+      adviceCn: "努力解决家庭冲突，建立支持性的关系。"
     }
   },
   {
     id: 40,
     name: "Five of Wands",
+    nameCn: "权杖五",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
       keywords: ["Conflict", "Disagreements", "Competition", "Tension"],
+      keywordsCn: ["冲突", "分歧", "竞争", "紧张"],
       meaning: "Minor conflicts, disagreements, and healthy competition. Tension that leads to growth.",
-      advice: "Work through disagreements constructively and use competition as motivation."
+      meaningCn: "轻微的冲突、分歧和健康的竞争。导致成长的紧张关系。",
+      advice: "Work through disagreements constructively and use competition as motivation.",
+      adviceCn: "建设性地处理分歧，将竞争作为动力。"
     },
     reversed: {
       keywords: ["Avoiding conflict", "Respecting differences", "Inner conflict"],
+      keywordsCn: ["避免冲突", "尊重差异", "内在冲突"],
       meaning: "Avoiding conflict, learning to respect differences, or dealing with inner conflict.",
-      advice: "Address conflicts directly but respectfully. Work on resolving inner contradictions."
+      meaningCn: "避免冲突、学会尊重差异，或处理内在冲突。",
+      advice: "Address conflicts directly but respectfully. Work on resolving inner contradictions.",
+      adviceCn: "直接但尊重地处理冲突。努力解决内在矛盾。"
     }
   },
   {
     id: 41,
     name: "Six of Wands",
+    nameCn: "权杖六",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
       keywords: ["Success", "Public recognition", "Progress", "Self-confidence"],
+      keywordsCn: ["成功", "公开认可", "进步", "自信"],
       meaning: "Success and public recognition for your achievements. Victory and increased self-confidence.",
-      advice: "Enjoy your success but stay humble. Use your achievements to inspire others."
+      meaningCn: "成功和你的成就得到公开认可。胜利和增强的自信心。",
+      advice: "Enjoy your success but stay humble. Use your achievements to inspire others.",
+      adviceCn: "享受你的成功，但要保持谦卑。用你的成就来激励他人。"
     },
     reversed: {
       keywords: ["Private achievement", "Personal definition of success", "Fall from grace"],
+      keywordsCn: ["私人成就", "个人成功定义", "声誉跌落"],
       meaning: "Private achievement, defining success for yourself, or experiencing a fall from grace.",
-      advice: "Define success on your own terms and don't rely solely on public recognition."
+      meaningCn: "私人成就、为自己定义成功，或经历声誉的跌落。",
+      advice: "Define success on your own terms and don't rely solely on public recognition.",
+      adviceCn: "按照自己的条件定义成功，不要仅仅依赖公开认可。"
     }
   },
   {
     id: 42,
     name: "Seven of Wands",
+    nameCn: "权杖七",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
       keywords: ["Challenge", "Competition", "Perseverance", "Maintaining control"],
+      keywordsCn: ["挑战", "竞争", "坂持不懈", "保持控制"],
       meaning: "Standing your ground against challenges and competition. Perseverance in difficult times.",
-      advice: "Stand firm in your convictions and don't give up when facing opposition."
+      meaningCn: "在挑战和竞争中站稳脚跟。在困难时期的坚持不懈。",
+      advice: "Stand firm in your convictions and don't give up when facing opposition.",
+      adviceCn: "在信念上站稳立场，面对反对时不要放弃。"
     },
     reversed: {
       keywords: ["Exhaustion", "Give up", "Lack of self-belief"],
+      keywordsCn: ["疲惫", "放弃", "缺乏自信"],
       meaning: "Feeling exhausted by constant challenges or giving up too easily due to lack of self-belief.",
-      advice: "Rest and recharge, then recommit to your goals with renewed self-belief."
+      meaningCn: "因持续的挑战而感到疲惫，或因缺乏自信而太容易放弃。",
+      advice: "Rest and recharge, then recommit to your goals with renewed self-belief.",
+      adviceCn: "休息和重新充电，然后以重新燃起的自信重新承诺你的目标。"
     }
   },
   {

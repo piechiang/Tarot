@@ -124,7 +124,7 @@ export default function IChing() {
           {/* Question Input */}
           <div className="space-y-3">
             <label htmlFor="question" className="text-sm font-semibold text-mystical-gold">
-              你的问题
+              你的问题<span className="text-gray-400 font-normal ml-1">（可选）</span>
             </label>
             <textarea
               id="question"
@@ -149,8 +149,7 @@ export default function IChing() {
 
           <button
             onClick={castCoins}
-            disabled={!question.trim()}
-            className="w-full py-3 bg-mystical-gold text-mystical-dark font-bold rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-3 bg-mystical-gold text-mystical-dark font-bold rounded-lg hover:bg-opacity-90 transition-colors"
           >
             投掷铜钱
           </button>
@@ -227,54 +226,125 @@ export default function IChing() {
 
       {/* Primary Interpretation */}
       <div className="bg-black/30 border border-gray-700 rounded-xl p-6 space-y-6">
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-3">
           <h3 className="text-2xl font-bold text-mystical-gold">
             {result.primary.chineseName} ({result.primary.name})
           </h3>
-          <p className="text-lg italic text-gray-300">{result.primary.judgmentCn || result.primary.judgment}</p>
+          {result.primary.judgmentCn && (
+            <p className="text-lg italic text-gray-300">{result.primary.judgmentCn}</p>
+          )}
+          
+          {/* Tags */}
+          {result.primary.tags && (
+            <div className="flex flex-wrap justify-center gap-2 mt-3">
+              {result.primary.tags.map((tag: string, index: number) => (
+                <span key={index} className="px-3 py-1 bg-mystical-purple/20 border border-mystical-purple/40 text-mystical-purple text-xs rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          
+          {/* Keywords */}
+          {result.primary.keywords && (
+            <div className="flex flex-wrap justify-center gap-2">
+              {result.primary.keywords.map((keyword: string, index: number) => (
+                <span key={index} className="px-2 py-1 bg-mystical-gold/10 text-mystical-gold text-xs rounded">
+                  {keyword}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="space-y-4">
-          <div>
-            <h4 className="font-semibold text-white mb-2">总体含义：</h4>
-            <p className="text-gray-300 leading-relaxed">{result.primary.meaningCn || result.primary.meaning}</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="space-y-3">
-              <h4 className="font-semibold text-mystical-gold">针对你情况的指导：</h4>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                {result.primary.adviceCn?.[questionCategory] || result.primary.advice[questionCategory]}
-              </p>
+          {/* Modern Summary */}
+          {result.primary.modernSummary && (
+            <div className="bg-mystical-navy/20 border border-mystical-navy/30 rounded-lg p-4">
+              <h4 className="font-semibold text-mystical-gold mb-2">现代解读：</h4>
+              <p className="text-gray-300 leading-relaxed">{result.primary.modernSummary}</p>
             </div>
+          )}
 
-            <div className="space-y-3">
-              <h4 className="font-semibold text-mystical-gold">综合建议：</h4>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                {result.primary.adviceCn?.general || result.primary.advice.general}
-              </p>
+          {/* Traditional Meaning */}
+          {(result.primary.meaningCn || result.primary.meaning) && (
+            <div>
+              <h4 className="font-semibold text-white mb-2">传统含义：</h4>
+              <p className="text-gray-300 leading-relaxed">{result.primary.meaningCn || result.primary.meaning}</p>
             </div>
-          </div>
+          )}
+
+          {/* Guidance */}
+          {result.primary.advice && (
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-3">
+                <h4 className="font-semibold text-mystical-gold">针对你情况的指导：</h4>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  {result.primary.adviceCn?.[questionCategory] || result.primary.advice[questionCategory]}
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <h4 className="font-semibold text-mystical-gold">综合建议：</h4>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  {result.primary.adviceCn?.general || result.primary.advice?.general}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Changing Lines Interpretation */}
       {result.changing && result.changingLines.length > 0 && (
         <div className="bg-black/30 border border-gray-700 rounded-xl p-6 space-y-4">
-          <h3 className="text-xl font-bold text-mystical-gold">变化</h3>
-          <p className="text-gray-300">
-            你的卦象包含 {result.changingLines.length} 个变爻，
-            表示从<strong>{result.primary.chineseName}</strong>转变为<strong>{result.changing.chineseName}</strong>。
-          </p>
-          <p className="text-gray-300 leading-relaxed">
-            {result.changing.meaningCn || result.changing.meaning}
-          </p>
-          <div className="pt-2">
-            <h4 className="font-semibold text-mystical-gold mb-2">变化指导：</h4>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              {result.changing.adviceCn?.[questionCategory] || result.changing.advice[questionCategory]}
+          <div className="space-y-3">
+            <h3 className="text-xl font-bold text-mystical-gold">变化趋势</h3>
+            <p className="text-gray-300">
+              你的卦象包含 {result.changingLines.length} 个变爻，
+              表示从<strong>{result.primary.chineseName}</strong>转变为<strong>{result.changing.chineseName}</strong>。
             </p>
+            
+            {/* Changing hexagram modern summary */}
+            {result.changing.modernSummary && (
+              <div className="bg-mystical-purple/10 border border-mystical-purple/20 rounded-lg p-4">
+                <h4 className="font-semibold text-mystical-gold mb-2">变化趋势解读：</h4>
+                <p className="text-gray-300 leading-relaxed">{result.changing.modernSummary}</p>
+              </div>
+            )}
+            
+            {/* Changing hexagram tags */}
+            {result.changing.tags && (
+              <div className="space-y-2">
+                <h5 className="text-sm font-medium text-mystical-gold">转化特质：</h5>
+                <div className="flex flex-wrap gap-2">
+                  {result.changing.tags.map((tag: string, index: number) => (
+                    <span key={index} className="px-2 py-1 bg-mystical-purple/15 border border-mystical-purple/30 text-mystical-purple text-xs rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
+          
+          {(result.changing.meaningCn || result.changing.meaning) && (
+            <div>
+              <h4 className="font-semibold text-mystical-gold mb-2">之卦含义：</h4>
+              <p className="text-gray-300 leading-relaxed">
+                {result.changing.meaningCn || result.changing.meaning}
+              </p>
+            </div>
+          )}
+          
+          {result.changing.advice && (
+            <div className="pt-2">
+              <h4 className="font-semibold text-mystical-gold mb-2">变化指导：</h4>
+              <p className="text-sm text-gray-300 leading-relaxed">
+                {result.changing.adviceCn?.[questionCategory] || result.changing.advice[questionCategory]}
+              </p>
+            </div>
+          )}
         </div>
       )}
 
