@@ -713,6 +713,9 @@ video {
 .mb-6 {
   margin-bottom: 1.5rem;
 }
+.ml-2 {
+  margin-left: 0.5rem;
+}
 .mt-16 {
   margin-top: 4rem;
 }
@@ -724,9 +727,6 @@ video {
 }
 .mt-8 {
   margin-top: 2rem;
-}
-.ml-2 {
-  margin-left: 0.5rem;
 }
 .flex {
   display: flex;
@@ -1180,6 +1180,9 @@ video {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
 .pt-12 {
   padding-top: 3rem;
 }
@@ -1188,9 +1191,6 @@ video {
 }
 .pt-6 {
   padding-top: 1.5rem;
-}
-.pb-3 {
-  padding-bottom: 0.75rem;
 }
 .text-left {
   text-align: left;

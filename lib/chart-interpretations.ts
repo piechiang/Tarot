@@ -331,8 +331,8 @@ export function generateChartInterpretation(chart: any): string {
       const key = `${getPlanetChineseName(aspect.planet1)}—${getPlanetChineseName(aspect.planet2)}`
       const aspectKey = getAspectKey(aspect.aspectType)
       
-      const specificInterpretation = ASPECT_INTERPRETATIONS.overrides[key]?.[aspectKey]
-      const genericInterpretation = ASPECT_INTERPRETATIONS.generic[aspectKey]
+      const specificInterpretation = (ASPECT_INTERPRETATIONS.overrides as any)[key]?.[aspectKey]
+      const genericInterpretation = (ASPECT_INTERPRETATIONS.generic as any)[aspectKey]
       
       const finalInterpretation = specificInterpretation || genericInterpretation || "这个相位带来独特的能量组合。"
       

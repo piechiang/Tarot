@@ -385,7 +385,7 @@ export function getPlanetHouseMeaning(planet: string, house: number, language: '
       12: '影响潜意识探索与精神修养，关注内在成长与奉献服务。'
     }
     
-    return houseDescriptions[house] || '影响着相应的生活领域。'
+    return houseDescriptions[house as keyof typeof houseDescriptions] || '影响着相应的生活领域。'
   }
   
   const houseNames = {
