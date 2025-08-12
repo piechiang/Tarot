@@ -28,7 +28,7 @@
   }
   
   .tarot-card-image {
-    @apply w-full h-full object-cover rounded-lg transition-all duration-300;
+    @apply w-full h-full object-contain rounded-lg transition-all duration-300;
     image-rendering: crisp-edges;
   }
   

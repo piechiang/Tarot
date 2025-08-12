@@ -85,7 +85,7 @@ export default function TarotCardImage({
       <img
         src={imageUrl}
         alt={`${card.nameCn || card.name} - ${card.suitCn || card.suit} ${reversed ? '逆位' : '正位'}`}
-        className={`w-full h-full object-cover rounded-lg transition-all duration-300 ${
+        className={`w-full h-full object-contain rounded-lg transition-all duration-300 ${
           reversed ? 'transform rotate-180' : ''
         } ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
         onLoad={handleImageLoad}

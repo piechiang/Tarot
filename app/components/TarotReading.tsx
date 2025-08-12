@@ -216,7 +216,7 @@ export default function TarotReading() {
               {drawn.position}
             </h3>
             
-            <div className="mystical-card mx-auto w-48 h-72 relative">
+            <div className="mystical-card mx-auto w-44 h-80 relative bg-gray-900 rounded-lg border border-gray-700">
               {revealedCards > index ? (
                 <TarotCardImage
                   card={drawn.card}
