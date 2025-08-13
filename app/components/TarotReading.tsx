@@ -183,16 +183,16 @@ export default function TarotReading() {
   if (currentStep === 'drawing') {
     return (
       <div className="max-w-2xl mx-auto text-center space-y-8">
-        <h2 className="text-3xl font-bold text-white font-mystical">Draw Your Cards</h2>
+        <h2 className="text-3xl font-bold text-white font-mystical">{t.tarot.drawCards}</h2>
         <div className="space-y-6">
           <p className="text-gray-300">
-            The cards have been shuffled. Click below to draw your {cardSpreads[selectedSpread].name.toLowerCase()}.
+            {t.tarot.drawCardsDesc}{t.tarot.spreads[selectedSpread].name.toLowerCase()}。
           </p>
           <button
             onClick={drawCards}
             className="px-8 py-3 bg-mystical-gold text-mystical-dark font-bold rounded-lg hover:bg-opacity-90 transition-colors"
           >
-            Draw Cards
+            抽取卡片
           </button>
         </div>
       </div>
@@ -202,7 +202,7 @@ export default function TarotReading() {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold text-white font-mystical">Your {cardSpreads[selectedSpread].name}</h2>
+        <h2 className="text-3xl font-bold text-white font-mystical">你的{t.tarot.spreads[selectedSpread].name}</h2>
         {question && (
           <p className="text-mystical-gold italic">"{question}"</p>
         )}

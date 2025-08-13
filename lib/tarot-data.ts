@@ -34,20 +34,20 @@ export const tarotCards: TarotCard[] = [
     suitCn: "大奥秘",
     imageUrl: "/images/tarot/major-arcana/00-fool.jpg",
     upright: {
-      keywords: ["New beginnings", "Innocence", "Spontaneity", "Adventure"],
-      keywordsCn: ["新开始", "纯真", "自发性", "冒险"],
+      keywords: ["New beginnings", "Innocence", "Spontaneity", "Adventure", "Fearless", "Living in the moment"],
+      keywordsCn: ["新开始", "纯真", "自发性", "冒险", "天不怕地不怕", "初生之犊不畏虎", "活在当下", "无限可能", "凭直觉行事", "新旅程"],
       meaning: "The Fool represents new beginnings, having faith in the future, being inexperienced, not knowing what to expect, having beginner's luck, improvisation and believing in the universe.",
-      meaningCn: "愚者代表新的开始，对未来抱有信心，缺乏经验，不知道该期待什么，拥有新手运气，即兴发挥和相信宇宙。",
+      meaningCn: "愚人是天不怕地不怕的年轻人，穿着色彩斑斓的服装，头戴成功桂冠，无视前方悬崖昂首阔步。左手白玫瑰象征纯洁与热情，右手权杖挂着经验包袱，小白狗狂吠提醒却仍保持欢欣神色。编号0代表无限可能，如初生之犊不畏虎，凭本能和直觉行事，像风一样自由自在，活在当下的乐观主义者。",
       advice: "Trust in yourself and embrace new opportunities. Take calculated risks and remain open to possibilities.",
-      adviceCn: "相信自己，拥抱新的机会。承担经过计算的风险，对各种可能性保持开放。"
+      adviceCn: "拥抱你内心的自由精神！凭直觉大胆行事，不要被经验束缚或他人眼光约束。这是开始新旅程的绝佳时机，无论是搬家、转学还是大胆的冒险。相信你的本能，活在当下，享受过程而非执着结果。你拥有无限可能，就像愚人一样无忧无虑地向前走。"
     },
     reversed: {
-      keywords: ["Recklessness", "Risk-taking", "Foolishness", "Lack of direction"],
-      keywordsCn: ["鲁莽", "冒险", "愚蠢", "缺乏方向"],
+      keywords: ["Recklessness", "Risk-taking", "Foolishness", "Lack of direction", "Avoiding responsibility", "Lost intuition"],
+      keywordsCn: ["鲁莽", "愚蠢", "缺乏方向", "逃避责任", "无法凭直觉行事", "与直觉失去连接", "时机掌握欠佳", "胆小怕事", "过于小心", "失去勇气"],
       meaning: "The reversed Fool suggests recklessness, risk-taking without thought, foolishness, and a lack of direction or purpose.",
-      meaningCn: "逆位的愚者暗示鲁莽、不假思索的冒险、愚蠢和缺乏方向或目标。",
+      meaningCn: "逆位愚人失去与直觉的连接，无法凭直觉行事或逃避责任。玫瑰枯萎掉落，行囊散落，太阳落下失去光明。表现为两个极端：过度时天真变愚蠢、大胆变鲁莽、不守规矩；不足时无法听从内心本能、过于小心错失良机、胆小怕事失去勇气。时机掌握欠佳，要么错失机会，要么在不当时机行动。",
       advice: "Think before you act. Consider the consequences of your decisions and seek guidance if needed.",
-      adviceCn: "行动前要三思。考虑你决定的后果，必要时寻求指导。"
+      adviceCn: "现在不是追求自由或逃避的时候，而是承担责任、完成义务的时刻。重新连接你的内在直觉，但要在冲动和理性间找到平衡。不要因恐惧而错失良机，也不要过度依赖他人建议而犹豫不决。完成手头未完成的事情，才能重新获得自发性的生活。"
     }
   },
   {
@@ -57,12 +57,12 @@ export const tarotCards: TarotCard[] = [
     suit: "major",
     suitCn: "大奥秘",
     upright: {
-      keywords: ["Manifestation", "Willpower", "Creation", "Skill"],
-      keywordsCn: ["显化", "意志力", "创造", "技能"],
+      keywords: ["Manifestation", "Willpower", "Creation", "Skill", "Communication", "New beginnings"],
+      keywordsCn: ["显化", "意志力", "创造", "技能", "沟通", "新开始", "发挥潜能", "时机"],
       meaning: "The Magician represents manifestation, resourcefulness, power, and inspired action. You have the tools to achieve your goals.",
-      meaningCn: "魔术师代表显化、机智、力量和受启发的行动。你拥有实现目标所需的工具。",
+      meaningCn: "魔法师是沟通天地的桥梁，身前的四要素（权杖、圣杯、宝剑、钱币）象征万事齐备。他头顶的无限符号代表无限可能，红玫瑰象征热情，白百合代表纯洁动机。此时正是发挥潜能、展开新计划的绝佳时机，你拥有将梦想化为现实的所有工具。",
       advice: "Focus your energy and use your skills to manifest your desires. You have everything you need to succeed.",
-      adviceCn: "集中你的能量，运用技能来显化你的愿望。你拥有成功所需的一切。"
+      adviceCn: "现在是展开新计划的最佳时机！发挥你的潜能，运用沟通能力和原有技能，加入新鲜创意来实践想法。采取主动，保持专心一致。万事具备，只需将抽象转化为实质，把梦想踏实地转化为现实。"
     },
     reversed: {
       keywords: ["Manipulation", "Trickery", "Lack of energy", "Confusion"],
@@ -981,20 +981,20 @@ export const tarotCards: TarotCard[] = [
     suit: "wands",
     suitCn: "权杖",
     upright: {
-      keywords: ["Success", "Public recognition", "Progress", "Self-confidence"],
-      keywordsCn: ["成功", "公开认可", "进步", "自信"],
+      keywords: ["Success", "Public recognition", "Progress", "Self-confidence", "Victory", "Leadership"],
+      keywordsCn: ["成功", "公开认可", "进步", "自信", "胜利归来", "众人拥戴", "傲视群雄", "衣锦还乡", "成就感", "好消息"],
       meaning: "Success and public recognition for your achievements. Victory and increased self-confidence.",
-      meaningCn: "成功和你的成就得到公开认可。胜利和增强的自信心。",
+      meaningCn: "如凯旋归来的英雄，戴着胜利桂冠骑白马而归，众人夹道欢迎拥戴。红色外衣象征热情主动，绿色布幔代表和平喜悦，六根权杖高举庆贺胜利。这是经过艰辛努力后的世俗成功，金榜题名、衣锦还乡的荣耀时刻，傲视群雄、对人生充满自信的态度。",
       advice: "Enjoy your success but stay humble. Use your achievements to inspire others.",
-      adviceCn: "享受你的成功，但要保持谦卑。用你的成就来激励他人。"
+      adviceCn: "现在正是享受荣耀、展现自信的时刻！抬头挺胸地接受众人的赞美和认可，你的努力已经得到回报。相信自己的能力，以领导者的姿态激励他人。好消息正在路上，地位提升和身份改变即将到来，尽情享受这份成就感吧。"
     },
     reversed: {
-      keywords: ["Private achievement", "Personal definition of success", "Fall from grace"],
-      keywordsCn: ["私人成就", "个人成功定义", "声誉跌落"],
+      keywords: ["Private achievement", "Personal definition of success", "Fall from grace", "False confidence", "Delayed success"],
+      keywordsCn: ["地位失落", "花环掉落", "虚假勇气", "骄者必败", "坏消息", "太早放弃", "分散精力", "迟来的成功", "出丑窘况"],
       meaning: "Private achievement, defining success for yourself, or experiencing a fall from grace.",
-      meaningCn: "私人成就、为自己定义成功，或经历声誉的跌落。",
+      meaningCn: "花环掉落，胜利的骑士从马上跌落，失去众人拥戴变成人人指责。这是由恐惧或脆弱所产生的虚假勇气与乐观，自信演变为骄傲而导致失败。好消息变成坏消息，期待落空成为挂念甚至恐惧。可能是太早放弃、精力分散，或面临强敌时的退缩背叛。",
       advice: "Define success on your own terms and don't rely solely on public recognition.",
-      adviceCn: "按照自己的条件定义成功，不要仅仅依赖公开认可。"
+      adviceCn: "避免虚假的勇气和乐观，审视自己是否过于骄傲或分散了精力。不要太早放弃，也不要把精神同时投入过多目标。坏消息或挫折是暂时的，学会从失败中反思，重新聚焦在正确的方向上。有时迟来的成功更加珍贵。"
     }
   },
   {
@@ -1004,65 +1004,89 @@ export const tarotCards: TarotCard[] = [
     suit: "wands",
     suitCn: "权杖",
     upright: {
-      keywords: ["Challenge", "Competition", "Perseverance", "Maintaining control"],
-      keywordsCn: ["挑战", "竞争", "坂持不懈", "保持控制"],
+      keywords: ["Challenge", "Competition", "Perseverance", "Maintaining control", "Defense", "Courage"],
+      keywordsCn: ["坚韧不拔", "独树一帜", "一夫当关", "居高临下", "奋力迎击", "不要放弃", "情急生智", "择善固执", "魄力"],
       meaning: "Standing your ground against challenges and competition. Perseverance in difficult times.",
-      meaningCn: "在挑战和竞争中站稳脚跟。在困难时期的坚持不懈。",
+      meaningCn: "绿衣男子站在青葱山顶，手持权杖奋力迎击山下六根权杖的攻击。一脚穿鞋一脚穿靴显示匆忙应战，高举权杖坚守防御位置。象征坚韧不拔、独树一帜的挑战魅力，以自己的力量抗衡所有其他力量。在危难中情急生智，运用智慧和反应能力一夫当关万夫莫敌。虽然孤军奋战，但占据高地优势。",
       advice: "Stand firm in your convictions and don't give up when facing opposition.",
-      adviceCn: "在信念上站稳立场，面对反对时不要放弃。"
+      adviceCn: "不要放弃！拿出大刀阔斧的决心面对挑战，成功之路将为你开启。虽然处境棘手让你感到无助，但事情并不像想象中那么可怕。像图中男子一样坚守岗位，发挥你的胆识和急智。你占据有利位置，继续努力前进必将得到成功的回报。择善固执，坚定维护正当立场。"
     },
     reversed: {
-      keywords: ["Exhaustion", "Give up", "Lack of self-belief"],
-      keywordsCn: ["疲惫", "放弃", "缺乏自信"],
+      keywords: ["Exhaustion", "Give up", "Lack of self-belief", "Overwhelmed", "Losing ground"],
+      keywordsCn: ["疲惫不堪", "放弃抵抗", "缺乏自信", "寡不敌众", "失去优势", "逃避挑战", "意志薄弱", "被人反对"],
       meaning: "Feeling exhausted by constant challenges or giving up too easily due to lack of self-belief.",
-      meaningCn: "因持续的挑战而感到疲惫，或因缺乏自信而太容易放弃。",
+      meaningCn: "从山顶跌落，失去居高临下的优势地位。面对众多挑战时感到疲惫不堪，缺乏继续战斗的勇气和决心。可能选择逃避而非坚守岗位，或在关键时刻意志薄弱。寡不敌众的局面让人失去信心，原本的坚韧不拔变成了轻易放弃。在众人反对下动摇立场，无法择善固执。",
       advice: "Rest and recharge, then recommit to your goals with renewed self-belief.",
-      adviceCn: "休息和重新充电，然后以重新燃起的自信重新承诺你的目标。"
+      adviceCn: "重新审视你的立场和策略，不是所有战斗都必须独自承担。适时寻求支援和合作，而非孤军奋战。恢复体力和信心后再重新面对挑战。学会分辨哪些战斗值得坚持，哪些需要适时退让。记住暂时的撤退是为了更好的反击。"
     }
   },
   {
     id: 43,
     name: "Eight of Wands",
+    nameCn: "权杖八",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
-      keywords: ["Swiftness", "Speed", "Progress", "Quick decisions"],
+      keywords: ["Swiftness", "Speed", "Progress", "Quick decisions", "Travel", "Freedom"],
+      keywordsCn: ["速度与激情", "自由流动", "迅速发展", "海外旅行", "新事物到来", "好消息", "财务全盛", "无拘无束", "目标清晰"],
       meaning: "Swift action, rapid progress, and quick decisions. Things moving at high speed.",
-      advice: "Act quickly on opportunities and maintain momentum in your projects."
+      meaningCn: "八根权杖整齐划一在空中航行，如飞机般快速飞行。象征速度与激情、自由流动的力量。事情发展快得出乎意料，拖延已久的事务将在短时间内得到结果。权杖顶端向下即将抵达地面，预示新事物即将到来。笼罩在自由且兴奋的氛围中，代表海外旅行、好消息和财务全盛时期。",
+      advice: "Act quickly on opportunities and maintain momentum in your projects.",
+      adviceCn: "拥抱这个速度与激情的时刻！新事物正快速向你靠近，可能是热情的恋爱对象、新工作机会或灵感突现。目标清晰可见且正轻松迈进，过去的努力现在开始收获。这是享受自由流动能量的全盛时期，海外旅行或跨越性计划都会顺利进行。保持积极乐观，好消息即将到来。"
     },
     reversed: {
-      keywords: ["Delays", "Frustration", "Resisting change"],
+      keywords: ["Delays", "Frustration", "Resisting change", "Blocked communication"],
+      keywordsCn: ["延迟受阻", "坏消息", "失去自由", "旅行受阻", "缺乏进展", "沟通不畅", "错失机会"],
       meaning: "Delays, frustration with slow progress, or resisting necessary changes.",
-      advice: "Be patient with delays and don't resist beneficial changes to your plans."
+      meaningCn: "权杖飞行受阻，自由流动的能量被限制。原本快速的进展变得缓慢，海外旅行或跨越性计划可能延迟或取消。好消息变成坏消息，财务全盛期暂时搁浅。可能错失重要机会，或在关键时刻犹豫不决。沟通不畅，原本的热情和激情被现实束缚。",
+      advice: "Be patient with delays and don't resist beneficial changes to your plans.",
+      adviceCn: "接受当前的延迟和限制，这是暂时的。不要因为进展缓慢而失去信心，重新评估你的计划和时机。有时放慢脚步能帮你看清真正重要的目标。避免在不合适的时机强行推进，耐心等待更好的机会。保持沟通畅通，不要让挫折影响人际关系。"
     }
   },
   {
     id: 44,
     name: "Nine of Wands",
+    nameCn: "权杖九",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
-      keywords: ["Resilience", "Courage", "Persistence", "Last stand"],
+      keywords: ["Resilience", "Courage", "Persistence", "Last stand", "Defense", "Vigilance"],
+      keywordsCn: ["换位思考", "重新评估", "防御备战", "警觉坚毅", "从挫败中学习", "最后一搏", "谨慎承诺", "回顾过去"],
       meaning: "Resilience and courage in the face of adversity. Persistence despite challenges.",
-      advice: "You're closer to success than you think. Don't give up now."
+      meaningCn: "壮汉靠着长杖等待，头部绷带显示过去战役受伤却仍不畏惧。身后八根权杖如栅栏防护，他站在缺口前补齐防线。这是换位思考、重新评估目前承诺的时机。从过去挫败中汲取经验，警觉备战面对未来挑战。不再盲目冲撞，而是小心翼翼、战战兢兢地坚持到底。",
+      advice: "You're closer to success than you think. Don't give up now.",
+      adviceCn: "现在是重新评估和审视过去的关键时刻！从之前的挫败中学习宝贵经验，不要重蹈覆辙。保持警觉备战状态，小心翼翼切勿托大。机会是给准备好的人，坚持信念但要谨慎行事。重新聚焦于真正重要的承诺和目标，抛弃那些不完全的计划。你比想象中更接近成功。"
     },
     reversed: {
-      keywords: ["Inner resources", "Struggle", "Paranoia"],
+      keywords: ["Inner resources", "Struggle", "Paranoia", "Over-defensive", "Inner conflict"],
+      keywordsCn: ["内在冲突", "过度防御", "疑神疑鬼", "寻求冲突", "无法和解", "被过去伤害", "难以承诺"],
       meaning: "Drawing on inner resources, struggling with paranoia, or feeling defensive.",
-      advice: "Trust in your inner strength and don't let paranoia cloud your judgment."
+      meaningCn: "内在冲突模式，寻求外在敌人来满足对刺激的渴求。过度防御心态，无法看出冲突来源是内在的。被过去伤害影响，在关系中过于谨慎，无法真诚地定下承诺。可能将自己不受欢迎的部分投射到他人身上，形成恶性循环。",
+      advice: "Trust in your inner strength and don't let paranoia cloud your judgment.",
+      adviceCn: "停止寻找外在敌人，真正的冲突来源在内心。不要让过去的伤害影响现在的判断和承诺。学会与问题的根本原因和解，而非持续战斗。在关系中要检视过去，衡量对目前的真正承诺。过度防御只会让你更加孤立，尝试放下戒心。"
     }
   },
   {
     id: 45,
     name: "Ten of Wands",
+    nameCn: "权杖十",
     suit: "wands",
+    suitCn: "权杖",
     upright: {
       keywords: ["Burden", "Hard work", "Responsibility", "Burn out"],
+      keywordsCn: ["压力重重", "负担过重", "责任", "不敢说不", "事必躬亲", "辛苦努力", "抛开重负", "委托他人"],
       meaning: "Heavy burdens and responsibilities. Hard work that may lead to burnout.",
-      advice: "Delegate responsibilities and don't take on more than you can handle."
+      meaningCn: "男人奋力扛着十根沉重权杖朝远方房子前进，被重量压得低头弯腰、喘不过气，疲累万分却不愿放弃。象征压力重重、负担过重，因不敢说'不'、计划不周、同时做太多事而导致的困境。虽然怀有信念与责任感，想一个人负起所有责任，却忘记自己只是凡人。预示努力后可能获得的成功，但过程异常辛苦。",
+      advice: "Delegate responsibilities and don't take on more than you can handle.",
+      adviceCn: "是时候抛开重负，轻身上路了！学会说'不'的艺术，不要把所有责任都往自己身上揽。多做规划，懂得委托他人分担工作，相信别人也能完成任务。你不是超人，不必事必躬亲。适当放手不是放弃，而是为了更高效地达成目标。压力来自于你的选择，改变选择就能减轻负担。"
     },
     reversed: {
       keywords: ["Doing it all", "Carrying the burden", "Delegation"],
+      keywordsCn: ["过度承担", "拒绝放手", "控制欲强", "不信任他人", "身心疲惫", "学会放手"],
       meaning: "Trying to do everything yourself or learning to delegate and share responsibilities.",
-      advice: "Learn to delegate and share the load. You don't have to do everything alone."
+      meaningCn: "极端的事必躬亲，完全不愿将控制权交出，认为'想妥善完成就要自己做'。过度承担不属于自己责任范围的事物，身心疲惫却仍拒绝放手。可能表示正在学习委托责任，或者意识到需要改变这种'超人'心态。也可能代表在关系中想独自承担所有责任的不健康模式。",
+      advice: "Learn to delegate and share the load. You don't have to do everything alone.",
+      adviceCn: "学会真正地放手和信任他人。你无法控制一切，也不应该为所有事情负责。在关系中，要认识到这是两个人的事，不能全部归咎于自己。建立健康的界限，区分哪些是你的责任，哪些不是。有时快刀斩乱麻比苦苦维持更明智。"
     }
   },
   {
@@ -1130,31 +1154,47 @@ export const tarotCards: TarotCard[] = [
   {
     id: 50,
     name: "Ace of Swords",
+    nameCn: "宝剑王牌",
     suit: "swords",
+    suitCn: "宝剑",
     upright: {
-      keywords: ["Breakthrough", "New ideas", "Mental clarity", "Success"],
+      keywords: ["Breakthrough", "New ideas", "Mental clarity", "Success", "Planning", "Justice"],
+      keywordsCn: ["毅然决然行动", "新冒险计划", "理智中立", "心智力量", "通彻思想", "理解之剑", "刺透假象", "决心", "正义", "知识"],
       meaning: "Mental breakthrough, new ideas, and clarity of thought. Success through intellectual pursuits.",
-      advice: "Use your mental clarity to cut through confusion and pursue new intellectual challenges."
+      meaningCn: "从云中伸出的手握着蓝色宝剑，剑尖刺穿皇冠，象征心智可以看透物质世界。这是理解之剑，刺透现实假象，展现生命的二元性。代表毅然决然的行动，开始计划新的冒险。意念形成的开端，为未来行动做准备的计划。双刃宝剑显示可伤人亦可救人，可建设亦可毁灭的力量。",
+      advice: "Use your mental clarity to cut through confusion and pursue new intellectual challenges.",
+      adviceCn: "现在是毅然决然行动的时机！用你清晰的思考来规划新的冒险和挑战。剑已出鞘，意念已形成，是时候将计划付诸实行。保持理智中立的力量，通过周详的计划获得成功。记住这把双刃剑的责任，要有面对艰难挑战的勇气和心理准备。你的心智力量可以刺透假象，看到事件的真相。"
     },
     reversed: {
-      keywords: ["Confusion", "Brutal thoughts", "Chaos"],
+      keywords: ["Confusion", "Brutal thoughts", "Chaos", "Extremism", "Misuse of power"],
+      keywordsCn: ["思维混乱", "残酷想法", "混沌", "极端主义", "滥用权力", "忘记中庸", "偏离正道", "破坏性思考"],
       meaning: "Mental confusion, harsh or brutal thoughts, and chaotic thinking patterns.",
-      advice: "Clear your mind and avoid harsh or destructive thinking patterns."
+      meaningCn: "剑尖偏离正道，失去理智的中立力量。思维混乱，想法极端，忘记了中庸之道。可能表示滥用心智力量，用残酷想法伤害他人或自己。原本的理解之剑变成了破坏之刃，计划失控，新冒险变成鲁莽行动。双刃剑的负面力量占据上风，带来伤害而非治愈。",
+      advice: "Clear your mind and avoid harsh or destructive thinking patterns.",
+      adviceCn: "暂停你的行动，重新找回理智和平衡。避免极端和残酷的想法，回归中庸之道。不要让愤怒或偏见蒙蔽你的判断力。重新审视你的计划，确保它们是建设性的而非破坏性的。真正的智慧是知道何时使用力量，何时保持克制。寻求专业建议或权威指导来澄清混乱的思维。"
     }
   },
   {
     id: 51,
     name: "Two of Swords",
+    nameCn: "宝剑二",
     suit: "swords",
+    suitCn: "宝剑",
     upright: {
       keywords: ["Difficult decisions", "Weighing options", "Indecision", "Stalemate"],
+      keywordsCn: ["艰难决断", "逃避现实", "内心矛盾", "冷战对峙", "自我封闭", "蒙蔽双眼", "感情退缩", "恐怖平衡", "防卫心态", "僵持不下"],
       meaning: "Difficult decisions, weighing options carefully, indecision, or being in a stalemate situation.",
-      advice: "Gather all information before making decisions. Sometimes inaction is temporary wisdom."
+      meaningCn: "身穿浅灰长袍的女人蒙眼而坐，双手持剑交叉胸前，背对汹涌海面。两把宝剑代表两种选择，她在保护自己远离痛苦感情。眼罩是自己绑上的，代表主动选择逃避现实。水面象征感情，她不仅背对感情还蒙蔽双眼，表现全然的逃避与困惑。这是二选一的抉择，却做不出决定甚至拒绝下决定。双剑交叉形成抗拒姿态，封闭的心灵宁愿否定一切也不愿打开内心。代表双方闹僵、对峙冷战的恐怖平衡与假性和平。",
+      advice: "Gather all information before making decisions. Sometimes inaction is temporary wisdom.",
+      adviceCn: "做出一个决断，无论对与错，不要试图逃避！摘掉眼罩，亲自去看清楚真相。诚实面对自己的内心情感，无论是什么要接受莫逃避，且放松勿抗拒。把蒙眼布取走，将宝剑放下，事情其实没有那么艰难。结合思考和感情做决定会更有效用。长期的紧张抗拒只会影响健康，真正的智慧是勇敢面对而非逃避现实。"
     },
     reversed: {
       keywords: ["Indecision", "Confusion", "Information overload"],
+      keywordsCn: ["混乱思维", "错误决定", "情绪失控", "极端选择", "盲目行动", "草率判断", "偏执对立", "无法冷静"],
       meaning: "Continued indecision, confusion, or feeling overwhelmed by too much information.",
-      advice: "Trust your instincts and make a decision even with incomplete information."
+      meaningCn: "摘掉眼罩后却看到更加混乱的现实，或者做出了草率错误的决定。可能表示情绪失控，无法保持理智中立的判断。原本的防卫变成了攻击，冷静的思考变成了偏执的对立。不是逃避现实就是走向另一个极端，做出鲁莽或伤害性的选择。失去了宝剑二原有的平衡与冷静，陷入情绪化的混乱决策中。",
+      advice: "Trust your instincts and make a decision even with incomplete information.",
+      adviceCn: "重新找回内心的平衡与冷静。不要让情绪主导你的判断，也不要因为之前的逃避而走向另一个极端。真正的勇气是在看清现实后仍能保持理智。暂停冲动的行动，给自己时间重新审视选择。寻求专业建议或可信任的人的意见来帮助澄清思路。记住平衡的重要性，避免从一个极端跳到另一个极端。"
     }
   },
   {
@@ -1310,31 +1350,47 @@ export const tarotCards: TarotCard[] = [
   {
     id: 62,
     name: "Queen of Swords",
+    nameCn: "宝剑皇后",
     suit: "swords",
+    suitCn: "宝剑",
     upright: {
       keywords: ["Independence", "Unbiased judgement", "Clear boundaries"],
+      keywordsCn: ["淡定冷静", "深思熟虑", "理智冷静", "独立自主", "洞察力强", "公正无私", "思路敏捷", "冰山美人", "为情所伤", "谨慎理性"],
       meaning: "Independent thinking, unbiased judgment, and clear communication with firm boundaries.",
-      advice: "Trust your judgment and communicate clearly. Maintain healthy boundaries with others."
+      meaningCn: "戴着蝴蝶花纹王冠象征灵魂和风要素，穿灰色内袍和蓝天灰云披风，表情坚毅似乎皱眉，左手对世界敞开，右手高举宝剑剑尖笔直向上。宝座扶手下有人头花纹象征风之精灵，头顶有高飞的鸟象征智慧。这是四位皇后中最理智冷静的一位，同时展现智慧与悲伤主题。她是公正无私的铁娘子，眼光锐利思想机智，不轻易流露情感但内心绝对刚强坚守原则。她历经风霜为情所伤，宁可洁身自好也不愿被繁杂事情束缚，感情上宁缺勿滥。",
+      advice: "Trust your judgment and communicate clearly. Maintain healthy boundaries with others.",
+      adviceCn: "淡定冷静，经过深思熟虑所得到的成就！保持理智不要过于情绪化，用你的洞察力看清真相破除迷惑。发挥你的组织能力和沟通技巧，在复杂情况中提供无与伦比的洞见。坚持独立自主的价值观，不要盲目跟随俗流。学会从过去的痛苦经验中获得智慧，给予他人明智的忠告。保持谨慎但不要过于冷漠，真正的力量来自内在的坚强和原则。"
     },
     reversed: {
       keywords: ["Overly emotional", "Harsh", "Bitter"],
+      keywordsCn: ["过于冷漠", "严厉苛刻", "孤独封闭", "缺乏温情", "过于理性", "情感创伤", "拒人千里", "完美主义", "批判过度", "难以亲近"],
       meaning: "Being overly emotional in decision-making, harsh in communication, or bitter from past hurts.",
-      advice: "Balance emotion with logic and avoid letting past hurts make you bitter or harsh."
+      meaningCn: "过于理智冷静而缺乏人情味，表现得过于严厉苛刻令人难以亲近。可能因为过去的情感创伤而变得过度防备，拒人千里之外。原本的独立自主变成孤独封闭，冷静分析变成冷酷无情。完美主义倾向导致对他人要求过高，批判过度。智慧变成了武器而非帮助，坚持原则变成顽固不化。失去了温暖的人性面向，只剩下冰冷的理性判断。",
+      advice: "Balance emotion with logic and avoid letting past hurts make you bitter or harsh.",
+      adviceCn: "重新找回内心的温暖，不要让理性完全主导你的人生。学会适度表达情感，给他人更多温暖而非只是冷静的分析。放下过去的情感创伤，不要让痛苦经历变成拒绝他人的藉口。降低完美主义标准，用更多同理心来理解他人的不完美。真正的智慧是知道何时保持理性，何时展现温情。让你的洞察力成为帮助而非判断的工具。"
     }
   },
   {
     id: 63,
     name: "King of Swords",
+    nameCn: "宝剑国王",
     suit: "swords",
+    suitCn: "宝剑",
     upright: {
       keywords: ["Intellectual power", "Clear thinking", "Authority", "Truth"],
+      keywordsCn: ["理性果断", "智慧权威", "将梦想化为现实", "明智决策", "专业权威", "客观理性", "坚定信念", "思路敏捷", "道德标准", "冷静分析"],
       meaning: "Intellectual power, clear thinking, moral authority, and commitment to truth and justice.",
-      advice: "Lead with wisdom and integrity. Use your intellectual gifts to serve justice and truth."
+      meaningCn: "四张国王牌中唯一正面出现的，穿蓝色内袍和红色披风，象征智慧必须以行动表现。右手持剑，剑尖偏向行动那边，左手戴权力戒指。背后帷幕饰有蝴蝶花纹象征灵魂和风要素。天空中两只鸟代表智慧与行动的选择。这是理性果断、具有智慧学识的权威人物，客观理性、凡事讲求合理公正，具有坚定信念和完整思想体系。他是专业权威，擅长企划创造，适合法律政治工作。代表明师指点、决策命令，是让人信赖的顾问和专业人士。",
+      advice: "Lead with wisdom and integrity. Use your intellectual gifts to serve justice and truth.",
+      adviceCn: "将梦想化为现实，用构想去做一些真实的事！运用你的智慧和专业能力成为权威指导者。保持客观理性的判断，以事实和原则为决策基础。发挥你的企划能力和清晰思维，在专业领域建立权威地位。当他人迷惘时，要能一语点醒梦中人。结合理性思考与实际行动，让知识在现实中发挥价值。做一个值得信赖的顾问，以明确的指引帮助他人解决问题。"
     },
     reversed: {
       keywords: ["Abuse of power", "Manipulative", "Tyrannical"],
+      keywordsCn: ["滥用权威", "过于严厉", "情感疏离", "冷酷无情", "独断专行", "批判过度", "控制欲强", "缺乏同理心", "固执己见", "忽视情感"],
       meaning: "Abuse of intellectual power, manipulative behavior, or tyrannical use of authority.",
-      advice: "Use your intelligence ethically and avoid manipulating others for personal gain."
+      meaningCn: "过于偏重理性思考而忽视情感需求，表现得过于冷漠疏离。可能滥用专业权威，变得独断专行或过度批判他人。原本的明智决策变成固执己见，坚持原则变成不知变通。控制欲和道德标准过高，缺乏同理心和情感支持。专业知识变成操控他人的工具，失去了服务正义的初衷。智慧权威变成冷酷的统治，忽视了人性的温暖面向。",
+      advice: "Use your intelligence ethically and avoid manipulating others for personal gain.",
+      adviceCn: "重新平衡理性与感性，不要让专业权威变成冷酷的工具。学会倾听他人的情感需求，提供温暖的支持而非只是冰冷的建议。降低批判标准，用更多同理心来理解他人。避免用智慧去控制或操控，真正的权威来自服务而非统治。在坚持原则的同时，也要保持灵活性和人性温暖。记住专业能力是为了帮助他人，而不是证明自己的优越。"
     }
   },
 

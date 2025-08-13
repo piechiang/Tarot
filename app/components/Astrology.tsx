@@ -339,8 +339,8 @@ export default function Astrology() {
   const jupiter = chart.planets.find(p => p.name === 'Jupiter')
   const saturn = chart.planets.find(p => p.name === 'Saturn')
   
-  // 计算上升星座
-  const ascendantSign = chart.planets.find(p => p.house === 1) || sun
+  // 计算上升星座 - 从上升点黄经计算
+  const ascendantSign = chart.summary.risingSign
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -420,7 +420,7 @@ export default function Astrology() {
                 <h3 className="text-xl font-bold">上升星座</h3>
               </div>
               <div className="space-y-2">
-                <p className="text-2xl font-bold text-white">上升 {ascendantSign?.signChinese}</p>
+                <p className="text-2xl font-bold text-white">上升 {ascendantSign}</p>
                 <p className="text-sm text-gray-300">{chart.ascendant.toFixed(1)}°</p>
               </div>
               <p className="text-sm text-gray-300 leading-relaxed">

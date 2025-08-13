@@ -10,7 +10,15 @@ import {
   calculateLST,
   calculateHouses,
   findHouseNumber,
-  longitudeToZodiacSign
+  longitudeToZodiacSign,
+  estimateDeltaTSeconds,
+  angleDifference,
+  angleSeparation,
+  normalizeAngle,
+  signedLonDiff,
+  HouseCalculation,
+  transformReferenceFrame,
+  ReferenceFrameTransformOptions
 } from './astronomical-utils'
 
 import { calculateAllPlanets, calculatePlanetGeocentric } from './vsop87-planets'
@@ -18,11 +26,14 @@ import { calculateMoonPosition } from './elp2000-moon'
 import { generateChartInterpretation } from './chart-interpretations'
 
 // 出生数据接口
+// IMPORTANT: dateTime must be in UTC to avoid double timezone conversion
+// Use UI layer timezone libraries (moment-timezone/luxon) to convert local time to UTC
 export interface BirthData {
-  dateTime: Date
-  latitude: number
-  longitude: number
-  timezone: number
+  dateTime: Date      // Must be UTC - this is used for calculations
+  latitude: number    // Degrees: [-90, 90] (South negative, North positive)
+  longitude: number   // Degrees: [-180, 180] (West negative, East positive)
+  /** @deprecated displayOnly: not used in calculations */ 
+  timezone?: number   // Hours offset from UTC, for display purposes only
 }
 
 // 天体位置信息
@@ -41,7 +52,7 @@ export interface CelestialBody {
 // 完整星盘数据
 export interface NatalChart {
   birthData: BirthData
-  houses: number[]
+  houses: HouseCalculation  // 使用命名结构而非数组
   ascendant: number
   midheaven: number
   planets: CelestialBody[]
@@ -72,14 +83,80 @@ export interface ChartSummary {
   description: string
 }
 
-// 相位定义
-const ASPECTS = [
+// 相位定义 - 基础容许度
+const BASE_ASPECTS = [
   { name: 'Conjunction', nameChinese: '合相', angle: 0, orb: 8 },
-  { name: 'Sextile', nameChinese: '六合', angle: 60, orb: 6 },
+  { name: 'Sextile', nameChinese: '六合', angle: 60, orb: 4 },
   { name: 'Square', nameChinese: '刑相', angle: 90, orb: 6 },
   { name: 'Trine', nameChinese: '三合', angle: 120, orb: 6 },
   { name: 'Opposition', nameChinese: '对冲', angle: 180, orb: 8 }
 ]
+
+// 发光体（太阳/月亮）的额外容许度
+const LUMINARY_ORB_BONUS = 2
+
+/**
+ * 格式化数值用于展示 - 分离计算精度和展示精度
+ * @param value 数值
+ * @param decimalPlaces 小数位数，默认2位
+ * @returns 格式化后的数值
+ */
+function formatForDisplay(value: number, decimalPlaces: number = 2): number {
+  return +value.toFixed(decimalPlaces)
+}
+
+/**
+ * 校验出生数据的有效性
+ * @param birthData 出生数据
+ * @throws Error 当数据无效时
+ */
+function validateBirthData(birthData: BirthData): void {
+  if (!birthData) {
+    throw new Error('Birth data is required')
+  }
+  
+  // 验证日期时间
+  if (!(birthData.dateTime instanceof Date)) {
+    throw new Error('dateTime must be a valid Date object')
+  }
+  
+  if (isNaN(birthData.dateTime.getTime())) {
+    throw new Error('dateTime must be a valid date')
+  }
+  
+  // 检查是否为合理的历史日期范围（支持占星计算的常见范围）
+  const year = birthData.dateTime.getFullYear()
+  if (year < 1800 || year > 2100) {
+    console.warn(`Birth year ${year} is outside recommended range [1800, 2100]. Results may have reduced accuracy.`)
+  }
+  
+  // 验证经纬度
+  if (typeof birthData.latitude !== 'number' || isNaN(birthData.latitude)) {
+    throw new Error('latitude must be a valid number')
+  }
+  
+  if (birthData.latitude < -90 || birthData.latitude > 90) {
+    throw new Error(`latitude must be between -90 and 90 degrees, got ${birthData.latitude}`)
+  }
+  
+  if (typeof birthData.longitude !== 'number' || isNaN(birthData.longitude)) {
+    throw new Error('longitude must be a valid number')
+  }
+  
+  if (birthData.longitude < -180 || birthData.longitude > 180) {
+    throw new Error(`longitude must be between -180 and 180 degrees, got ${birthData.longitude}`)
+  }
+  
+  // 软提示：UTC时间检查
+  if (birthData.dateTime.getTimezoneOffset() !== 0) {
+    console.warn('dateTime appears to have timezone offset. Ensure it is converted to UTC for accurate calculations.')
+  }
+  
+  // 极地地区警告
+  if (Math.abs(birthData.latitude) >= 66.5) {
+    console.warn(`Latitude ${birthData.latitude}° is in polar region. House calculations may be imprecise.`)
+  }
+}
 
 // 行星名称映射
 const PLANET_INFO = {
@@ -94,54 +171,252 @@ const PLANET_INFO = {
   neptune: { name: 'Neptune', nameChinese: '海王星', symbol: '♆' }
 }
 
+// 位置缓存接口 - 带LRU管理
+interface PositionCache {
+  [key: string]: { longitude: number; latitude: number }
+}
+
+interface ReferenceFrameOptions {
+  center: 'geo' | 'helio'  // geocentric or heliocentric
+  frame: 'ecl-date' | 'j2000'  // ecliptic-of-date or J2000
+  applyNutation?: boolean
+  applyAberration?: boolean
+}
+
+const MAX_CACHE_SIZE = 400
+const MAX_CACHE_SIZE_MULTIPLIER = 2  // 紧急上限保护倍数
+const MAX_PLANET_SAMPLES = 50        // 每个行星最大采样点数
+const positionCache: PositionCache = {}
+const cacheKeys: string[] = []
+
+
 /**
- * 检查行星是否逆行
+ * 获取缓存统计信息
  */
-function isRetrograde(planetName: string, julianDay: number): boolean {
+export function getCacheStats(): { size: number, maxSize: number, planets: Record<string, number> } {
+  const planetCounts: Record<string, number> = {}
+  
+  cacheKeys.forEach(key => {
+    const planetName = key.split('|')[0]
+    planetCounts[planetName] = (planetCounts[planetName] || 0) + 1
+  })
+  
+  return {
+    size: cacheKeys.length,
+    maxSize: MAX_CACHE_SIZE,
+    planets: planetCounts
+  }
+}
+
+/**
+ * LRU缓存管理函数 - 增强保护机制
+ */
+function setPositionCache(key: string, value: { longitude: number; latitude: number }): void {
+  // 上限倍数保护：防止极端并发导致短时抖动
+  if (cacheKeys.length >= MAX_CACHE_SIZE * MAX_CACHE_SIZE_MULTIPLIER) {
+    console.warn(`[astrology] Cache size exceeded emergency limit (${MAX_CACHE_SIZE * MAX_CACHE_SIZE_MULTIPLIER}), performing aggressive cleanup`)
+    
+    // 紧急清理：移除一半缓存
+    const keysToRemove = cacheKeys.splice(0, Math.floor(cacheKeys.length / 2))
+    keysToRemove.forEach(k => delete positionCache[k])
+  }
+  
+  // 检查单行星采样点上限
+  const planetName = key.split('|')[0]
+  const planetKeys = cacheKeys.filter(k => k.startsWith(planetName + '|'))
+  if (planetKeys.length >= MAX_PLANET_SAMPLES) {
+    // 移除该行星最老的采样点
+    const oldestPlanetKey = planetKeys[0]
+    const index = cacheKeys.indexOf(oldestPlanetKey)
+    if (index !== -1) {
+      cacheKeys.splice(index, 1)
+      delete positionCache[oldestPlanetKey]
+    }
+  }
+  
+  // 如果key已存在，从原位置移除
+  const existingIndex = cacheKeys.indexOf(key)
+  if (existingIndex !== -1) {
+    cacheKeys.splice(existingIndex, 1)
+  }
+  
+  // 将key放到队尾（最近使用）
+  cacheKeys.push(key)
+  positionCache[key] = value
+  
+  // 标准LRU淘汰策略：移除最老的条目
+  if (cacheKeys.length > MAX_CACHE_SIZE) {
+    const oldKey = cacheKeys.shift()!
+    delete positionCache[oldKey]
+  }
+}
+
+/**
+ * 缓存的行星位置获取函数 - 支持参考系选项
+ */
+function getCachedPlanetPosition(
+  planetName: string, 
+  jd: number, 
+  options: ReferenceFrameOptions = { center: 'geo', frame: 'ecl-date', applyNutation: true, applyAberration: true }
+): { longitude: number; latitude: number } {
+  const key = `${planetName}|${jd.toFixed(6)}|${options.center}|${options.frame}|${options.applyNutation}|${options.applyAberration}`
+  
+  if (!positionCache[key]) {
+    let position: { longitude: number; latitude: number }
+    
+    // 添加临时警告（在完全实现前）
+    if (!(options.center === 'geo' && options.frame === 'ecl-date')) {
+      console.warn('[astrology] ReferenceFrameOptions requested but transformations are TODO; results may be inconsistent.')
+    }
+    
+    if (planetName === 'moon') {
+      // Moon calculation - always geocentric, already in ecliptic-of-date
+      position = calculateMoonPosition(jd)
+    } else {
+      // Planet calculation with reference frame options
+      position = calculatePlanetGeocentric(planetName, jd)
+      
+      // 应用参考系变换
+      if (options.frame === 'ecl-date' || options.applyNutation || options.applyAberration) {
+        position = transformReferenceFrame(position, jd, undefined, {
+          center: options.center,
+          frame: options.frame,
+          applyNutation: options.applyNutation,
+          applyAberration: options.applyAberration
+        })
+      }
+    }
+    
+    setPositionCache(key, position)
+  } else {
+    // 缓存命中时也要更新LRU顺序
+    setPositionCache(key, positionCache[key])
+  }
+  
+  return positionCache[key]
+}
+
+/**
+ * 检查行星是否逆行 - 使用自适应采样策略
+ */
+function isRetrograde(
+  planetName: string, 
+  jdTT: number, 
+  options: ReferenceFrameOptions = { center: 'geo', frame: 'ecl-date' }
+): boolean {
   if (planetName === 'sun' || planetName === 'moon') return false
   
-  const position1 = calculatePlanetGeocentric(planetName, julianDay - 1)
-  const position2 = calculatePlanetGeocentric(planetName, julianDay + 1)
-  
-  let velocity = position2.longitude - position1.longitude
-  if (velocity > 180) velocity -= 360
-  if (velocity < -180) velocity += 360
+  // 使用与速度计算相同的自适应采样策略
+  const velocity = calculateDailySpeed(planetName, jdTT, options)
   
   return velocity < 0
 }
 
 /**
- * 计算两个角度之间的差值
+ * 计算行星的日运动速度 (度/天) - 自适应采样版本（驻点处理）
  */
-function angleDifference(angle1: number, angle2: number): number {
-  let diff = Math.abs(angle1 - angle2)
-  if (diff > 180) diff = 360 - diff
-  return diff
+function calculateDailySpeed(
+  planetName: string, 
+  jdTT: number, 
+  options: ReferenceFrameOptions = { center: 'geo', frame: 'ecl-date' }
+): number {
+  // 初始步长
+  let timeStep = 0.25
+  
+  const getPosition = (jd: number) => getCachedPlanetPosition(planetName, jd, options).longitude
+  
+  // 计算初始速度
+  let velocity = signedLonDiff(getPosition(jdTT - timeStep), getPosition(jdTT + timeStep)) / (2 * timeStep)
+  
+  // 如果速度很小（可能接近驻点），使用更精细的采样
+  if (Math.abs(velocity) < 0.02) {
+    timeStep = 0.1
+    const pos1 = getPosition(jdTT - timeStep)
+    const pos2 = getPosition(jdTT + timeStep)
+    velocity = signedLonDiff(pos1, pos2) / (2 * timeStep)
+    
+    // 如果仍然很小，进一步细化（特别适用于水/金/火的驻点）
+    if (Math.abs(velocity) < 0.005 && ['mercury', 'venus', 'mars'].includes(planetName)) {
+      timeStep = 0.05
+      const pos1Fine = getPosition(jdTT - timeStep)
+      const pos2Fine = getPosition(jdTT + timeStep)
+      velocity = signedLonDiff(pos1Fine, pos2Fine) / (2 * timeStep)
+    }
+  }
+  
+  return velocity
 }
 
 /**
- * 计算相位
+ * 计算相位的动态容许度（考虑行星类型）
  */
-function calculateAspects(planets: CelestialBody[]): Aspect[] {
+function getAspectOrb(aspectName: string, planet1: string, planet2: string): number {
+  const baseAspect = BASE_ASPECTS.find(a => a.name === aspectName)
+  if (!baseAspect) return 5 // 默认容许度
+  
+  let orb = baseAspect.orb
+  
+  // 太阳和月亮有更大的容许度
+  if (planet1 === 'Sun' || planet1 === 'Moon') orb += LUMINARY_ORB_BONUS
+  if (planet2 === 'Sun' || planet2 === 'Moon') orb += LUMINARY_ORB_BONUS
+  
+  return orb
+}
+
+/**
+ * 判断相位是入相还是出相
+ */
+function isApplyingAspect(
+  lon1: number, speed1: number, 
+  lon2: number, speed2: number, 
+  exactAngle: number
+): boolean {
+  const currentSeparation = angleSeparation(lon1, lon2)
+  
+  // 计算未来一小段时间后的位置
+  const futureTime = 0.1 // 0.1天后
+  const futureLon1 = normalizeAngle(lon1 + speed1 * futureTime)
+  const futureLon2 = normalizeAngle(lon2 + speed2 * futureTime)
+  const futureSeparation = angleSeparation(futureLon1, futureLon2)
+  
+  // 如果未来与精确相位的距离小于当前距离，则为入相
+  return Math.abs(futureSeparation - exactAngle) < Math.abs(currentSeparation - exactAngle)
+}
+
+
+/**
+ * 计算相位 - 改进版本，包含入相/出相判断
+ */
+function calculateAspects(planets: CelestialBody[], planetSpeeds: Record<string, number>): Aspect[] {
   const aspects: Aspect[] = []
   
   for (let i = 0; i < planets.length; i++) {
     for (let j = i + 1; j < planets.length; j++) {
       const planet1 = planets[i]
       const planet2 = planets[j]
-      const angle = angleDifference(planet1.longitude, planet2.longitude)
+      const separation = angleSeparation(planet1.longitude, planet2.longitude)
       
-      for (const aspectDef of ASPECTS) {
-        const orb = Math.abs(angle - aspectDef.angle)
-        if (orb <= aspectDef.orb) {
+      for (const aspectDef of BASE_ASPECTS) {
+        const orbMax = getAspectOrb(aspectDef.name, planet1.name, planet2.name)
+        const orb = Math.abs(separation - aspectDef.angle)
+        
+        if (orb <= orbMax) {
+          const speed1 = planetSpeeds[planet1.name] || 0
+          const speed2 = planetSpeeds[planet2.name] || 0
+          const applying = isApplyingAspect(
+            planet1.longitude, speed1,
+            planet2.longitude, speed2,
+            aspectDef.angle
+          )
+          
           aspects.push({
             planet1: planet1.name,
             planet2: planet2.name,
-            angle,
+            angle: separation,  // 保持计算精度，仅在展示时四舍五入
             aspectType: aspectDef.name,
             aspectTypeChinese: aspectDef.nameChinese,
-            orb,
-            isApplying: true // 简化处理
+            orb: orb,          // 保持计算精度，仅在展示时四舍五入
+            isApplying: applying
           })
           break
         }
@@ -155,7 +430,7 @@ function calculateAspects(planets: CelestialBody[]): Aspect[] {
 /**
  * 分析星盘模式和元素分布
  */
-function analyzeChart(planets: CelestialBody[]): ChartSummary {
+function analyzeChart(planets: CelestialBody[], ascendant: number): ChartSummary {
   const elements = { fire: 0, earth: 0, air: 0, water: 0 }
   const qualities = { cardinal: 0, fixed: 0, mutable: 0 }
   
@@ -206,11 +481,12 @@ function analyzeChart(planets: CelestialBody[]): ChartSummary {
   // 获取关键星座
   const sun = planets.find(p => p.name === 'Sun')
   const moon = planets.find(p => p.name === 'Moon')
-  const asc = planets.find(p => p.house === 1)
+  // 上升星座通过上升点黄经计算，而不是找第1宫的行星
+  const ascendantZodiac = longitudeToZodiacSign(ascendant)
   
   const sunSign = sun?.signChinese || ''
   const moonSign = moon?.signChinese || ''
-  const risingSign = asc?.signChinese || ''
+  const risingSign = ascendantZodiac.signChinese
   
   // 生成描述
   const elementMap: Record<string, string> = {
@@ -240,61 +516,113 @@ function analyzeChart(planets: CelestialBody[]): ChartSummary {
 }
 
 /**
- * 计算完整的本命盘
+ * 计算完整的本命盘 - 改进版本，使用精确时间标准
  */
-export async function calculateNatalChart(birthData: BirthData): Promise<NatalChart> {
-  const julianDay = dateObjectToJulianDay(birthData.dateTime)
-  const T = julianCenturiesFromJ2000(julianDay)
+export async function calculateNatalChart(
+  birthData: BirthData, 
+  options: ReferenceFrameOptions = { center: 'geo', frame: 'ecl-date' }
+): Promise<NatalChart> {
+  // 输入校验和边界检查
+  validateBirthData(birthData)
   
-  // 计算黄道倾角
-  const obliquity = calculateObliquity(T)
+  // 1. 时间转换：从UTC到TT (Terrestrial Time)
+  // IMPORTANT: birthData.dateTime MUST be UTC already
+  // UI layer should use timezone libraries to convert local time to UTC
+  const jdUTC = dateObjectToJulianDay(birthData.dateTime)  // UT1 ≈ UTC
   
-  // 计算当地恒星时
-  const lst = calculateLST(julianDay, birthData.longitude)
+  // 修正：estimateΔTSeconds 已经返回 TT - UT1，不需要再加 32.184s
+  const deltaT = estimateDeltaTSeconds(birthData.dateTime)
+  const jdTT = jdUTC + deltaT / 86400  // TT = UT1 + ΔT
   
-  // 计算宫位
-  const houses = calculateHouses(lst, birthData.latitude, obliquity)
-  const ascendant = houses[0]  // 第1宫 = 上升点
-  const midheaven = houses[9]  // 第10宫 = 天顶
+  // 2. 基于TT的天文时间
+  const T = julianCenturiesFromJ2000(jdTT)
   
-  // 计算所有行星位置
-  const planetPositions = calculateAllPlanets(julianDay)
+  // 3. 计算真黄道倾角（包含章动）
+  const { epsTrue } = calculateObliquity(T)
   
-  // 特别计算月球位置（使用ELP2000）
-  const moonPosition = calculateMoonPosition(julianDay)
+  // 4. 计算当地恒星时（使用UT时间）
+  const lst = calculateLST(jdUTC, birthData.longitude)
+  
+  // 5. 计算宫位（使用真黄道倾角）
+  const houses = calculateHouses(lst, birthData.latitude, epsTrue)
+  
+  // 验证宫位计算结果
+  if (!houses.cusps || houses.cusps.length !== 12) {
+    throw new Error(`Invalid house calculation: expected 12 cusps, got ${houses.cusps?.length || 0}`)
+  }
+  
+  for (let i = 0; i < 12; i++) {
+    const cusp = houses.cusps[i]
+    if (typeof cusp !== 'number' || isNaN(cusp)) {
+      throw new Error(`Invalid house cusp ${i + 1}: must be a valid number, got ${cusp}`)
+    }
+  }
+  
+  const ascendant = houses.asc   // 上升点
+  const midheaven = houses.mc    // 天顶
+  
+  // 6. 计算所有行星位置（使用TT时间以获得精确的星历表）
+  const planetPositions = calculateAllPlanets(jdTT)
+  // TODO: Add reference frame options to calculateAllPlanets
+  
+  // 7. 特别计算月球位置（使用ELP2000）
+  const moonPosition = calculateMoonPosition(jdTT)
+  // TODO: Add reference frame options to calculateMoonPosition
   planetPositions.moon = moonPosition
   
-  // 构建天体对象数组
+  // 8. 计算行星速度（用于相位分析）
+  const planetSpeeds: Record<string, number> = {}
+  for (const rawPlanetName of Object.keys(planetPositions)) {
+    // 确保键名小写一致性
+    const normalizedName = rawPlanetName.toLowerCase()
+    const planetInfo = PLANET_INFO[normalizedName as keyof typeof PLANET_INFO]
+    
+    if (planetInfo) {
+      // 使用标准化的行星名称作为键（如 "Sun", "Moon" 等）
+      const planetKey = planetInfo.name
+      planetSpeeds[planetKey] = calculateDailySpeed(normalizedName, jdTT, options)
+    } else {
+      // 后备方案：使用原始名称
+      console.warn(`Unknown planet name: ${rawPlanetName}, using as-is`)
+      planetSpeeds[rawPlanetName] = calculateDailySpeed(normalizedName, jdTT, options)
+    }
+  }
+  
+  // 9. 构建天体对象数组
   const planets: CelestialBody[] = []
   
-  for (const [planetName, position] of Object.entries(planetPositions)) {
-    const planetInfo = PLANET_INFO[planetName as keyof typeof PLANET_INFO]
-    if (!planetInfo) continue
+  for (const [rawPlanetName, position] of Object.entries(planetPositions)) {
+    const normalizedName = rawPlanetName.toLowerCase()
+    const planetInfo = PLANET_INFO[normalizedName as keyof typeof PLANET_INFO]
+    if (!planetInfo) {
+      console.warn(`Skipping unknown planet: ${rawPlanetName}`)
+      continue
+    }
     
     const zodiac = longitudeToZodiacSign(position.longitude)
-    const house = findHouseNumber(position.longitude, houses)
-    const retrograde = isRetrograde(planetName, julianDay)
+    const house = findHouseNumber(position.longitude, houses.cusps)
+    const retrograde = isRetrograde(normalizedName, jdTT, options)
     
     planets.push({
       name: planetInfo.name,
       nameChinese: planetInfo.nameChinese,
-      longitude: position.longitude,
-      latitude: position.latitude,
+      longitude: formatForDisplay(normalizeAngle(position.longitude)),
+      latitude: formatForDisplay(position.latitude),
       sign: zodiac.sign,
       signChinese: zodiac.signChinese,
-      degree: zodiac.degree,
+      degree: formatForDisplay(zodiac.degree),
       house,
       retrograde
     })
   }
   
-  // 计算相位
-  const aspects = calculateAspects(planets)
+  // 10. 计算相位（包含入相/出相分析）
+  const aspects = calculateAspects(planets, planetSpeeds)
   
-  // 分析星盘
-  const summary = analyzeChart(planets)
+  // 11. 分析星盘（使用正确的上升星座）
+  const summary = analyzeChart(planets, ascendant)
   
-  const chart = {
+  const chart: NatalChart = {
     birthData,
     houses,
     ascendant,
@@ -305,8 +633,12 @@ export async function calculateNatalChart(birthData: BirthData): Promise<NatalCh
     interpretation: '' // 临时占位
   }
   
-  // 生成详细解读
+  // 12. 生成详细解读
   chart.interpretation = generateChartInterpretation(chart)
+  
+  // 13. 清空位置缓存（如果需要）
+  // 在某些使用场景下可能需要在每次计算后清空缓存
+  // clearPositionCache()
   
   return chart
 }
@@ -396,4 +728,12 @@ export function getPlanetHouseMeaning(planet: string, house: number, language: '
   
   const houseName = houseNames[house as keyof typeof houseNames] || `${house}th House`
   return `${planet} in ${houseName} influences how you express yourself in this area of life.`
+}
+
+/**
+ * 清空位置缓存（可选使用）
+ */
+export function clearPositionCache(): void {
+  Object.keys(positionCache).forEach(key => delete positionCache[key])
+  cacheKeys.length = 0
 }
